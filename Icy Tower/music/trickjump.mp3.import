@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/trickjump.mp3-509b996440e69e0ed706ff50e921b566.mp3str"
+
+[deps]
+
+source_file="res://music/trickjump.mp3"
+dest_files=[ "res://.import/trickjump.mp3-509b996440e69e0ed706ff50e921b566.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

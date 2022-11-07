@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://objects/Furniture.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/Bed.png" type="Texture" id=2]
+[ext_resource path="res://objects/Bed.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 120, 90 )
+
+[node name="Bed" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+GRID_W = 4
+GRID_H = 3
+actions = [ "hide" ]
+obj_name = "Bed"
+obj_desc = "A comfy king-sized bed. Fitted with large covers perfect for hiding under."
+
+[node name="Sprite" parent="Body" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="Body" index="1"]
+shape = SubResource( 1 )

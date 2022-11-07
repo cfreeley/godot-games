@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/booya2.mp3-7c34fd146ac4326eb108e8bbd5aaa06d.mp3str"
+
+[deps]
+
+source_file="res://music/booya2.mp3"
+dest_files=[ "res://.import/booya2.mp3-7c34fd146ac4326eb108e8bbd5aaa06d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

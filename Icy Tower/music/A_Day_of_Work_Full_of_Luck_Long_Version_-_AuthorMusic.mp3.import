@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/A_Day_of_Work_Full_of_Luck_Long_Version_-_AuthorMusic.mp3-1352ac5992f995479ba13cd6800a3556.mp3str"
+
+[deps]
+
+source_file="res://music/A_Day_of_Work_Full_of_Luck_Long_Version_-_AuthorMusic.mp3"
+dest_files=[ "res://.import/A_Day_of_Work_Full_of_Luck_Long_Version_-_AuthorMusic.mp3-1352ac5992f995479ba13cd6800a3556.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
