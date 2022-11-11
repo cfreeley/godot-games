@@ -29,7 +29,7 @@ func _ready():
 	random.randomize()
 
 func click_object(event, caller, n, desc):
-	print(n, ": ", desc)
+	logMessage(str(n, ": ", desc))
 
 func open_actions(event, caller, actions):
 	$GUI/ContextMenu.position = caller.position
@@ -48,7 +48,7 @@ func on_context_action_pressed(id):
 	if (selected_obj.has_method(action)):
 		selected_obj.call(action)
 	else:
-		print("Unable to ", action)
+		logMessage(str("Unable to ", action))
 
 func _on_HighliteButton_button_down():
 	get_tree().call_group("interactable", "toggle_highlite", true)
@@ -61,11 +61,13 @@ func skill_check(bonus):
 	var d2 = random.randi_range(1,6)
 	var res = d1 + d2 + bonus
 	var bonus_str = str(" + ", bonus) if bonus >= 0 else str(" - ", -bonus)
-	print ("(", d1, " + ", d2, ")", bonus_str, " = ", res)
+	logMessage(str("(", d1, " + ", d2, ")", bonus_str, " = ", res))
 	if (res >= 10):
 		return Results.Pass
 	elif (res >= 7):
 		return Results.Partial
 	else:
 		return Results.Fail
-	
+
+func logMessage(message):
+	$GUI/Terminal.text += str(message, '\n')

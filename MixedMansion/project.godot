@@ -14,14 +14,14 @@ config/name="MixedMansion"
 run/main_scene="res://Manor.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-Game="*res://Game.tscn"
-
 [display]
 
 window/size/width=480
-window/size/height=480
+window/size/height=570
+
+[global]
+
+window=false
 
 [gui]
 

@@ -5,6 +5,7 @@ export(Array, PackedScene) var room_types = []
 var rooms = []
 var rooms_by_door = {}
 var last_door
+var Game
 
 func generate_mansion():
 	var foyer = Foyer.instance()
@@ -24,6 +25,7 @@ func generate_mansion():
 		rooms.push_back(new_room)
 
 func _ready():
+	Game = get_tree().current_scene
 	Game.manor = self
 	generate_mansion()
 	move_player(rooms[0])
@@ -42,7 +44,7 @@ func enter_door(door_id):
 			if ("door_id" in child and child.door_id == door_id * -1):
 				move_player(room, child)
 				return
-	print("Door doesn't seem to budge.")
+	Game.logMessage("Door doesn't seem to budge.")
 	
 
 

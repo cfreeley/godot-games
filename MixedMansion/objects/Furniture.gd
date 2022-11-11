@@ -9,6 +9,7 @@ export(String) var obj_desc = ""
 
 var is_highlited = false
 var bounding_rect
+var Game
 
 func toggle_highlite(val = true):
 	is_highlited = val
@@ -19,6 +20,7 @@ func _draw():
 		draw_rect(Rect2(-bounding_rect / 2, bounding_rect), Color.yellow, false)
 
 func _ready():
+	Game = get_tree().current_scene
 	bounding_rect = Vector2(GRID_W * Game.CELL_LEN, GRID_H * Game.CELL_LEN)
 	var offset = Vector2(1,1)
 	$Body/CollisionShape2D.shape.extents = bounding_rect / 2
