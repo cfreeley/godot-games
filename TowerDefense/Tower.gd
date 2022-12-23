@@ -3,6 +3,11 @@ extends Node2D
 var need_reload = false
 var target = null
 var Bullet = preload("res://Bullet.tscn")
+export var cost = 200
+export var radius = 90
+
+func _ready():
+	$Radius/CollisionShape2D.shape.radius = radius
 
 func _on_Timer_timeout():
 	need_reload = false
