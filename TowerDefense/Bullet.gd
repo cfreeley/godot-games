@@ -1,6 +1,6 @@
 extends Node2D
 
-export var damage = 1
+export var damage = 100
 
 var speed = 600
 var direction

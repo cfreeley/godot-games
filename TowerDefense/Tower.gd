@@ -5,9 +5,12 @@ var target = null
 var Bullet = preload("res://Bullet.tscn")
 export var cost = 200
 export var radius = 90
+export var damage = 100
+export var fire_rate = .25
 
 func _ready():
 	$Radius/CollisionShape2D.shape.radius = radius
+	$Timer.wait_time = fire_rate
 
 func _on_Timer_timeout():
 	need_reload = false
@@ -29,6 +32,7 @@ func aim_and_shoot():
 	var bul = Bullet.instance()
 	add_child(bul)
 	bul.direction = (target.global_position-global_position).normalized()
+	bul.damage = damage
 	need_reload = true
 	$Timer.start()
 
