@@ -21,11 +21,7 @@ var base_en_health = base_dam * 4.0
 var total_en_str = base_dps * wave_length
 var num_enemies = total_en_str / base_en_health
 var spawn_period = wave_length / num_enemies
-var base_en_reward = base_cost / num_enemies
-
-func _ready():
-	print(num_enemies, base_en_reward)
-	
+var base_en_reward = round (base_cost / num_enemies)
 
 func _draw():
 	draw_polyline($EnemyPath.curve.get_baked_points(), Color.yellowgreen, 4, true)
