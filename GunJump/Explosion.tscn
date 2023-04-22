@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnintuynse05e"]
+
+[ext_resource type="Script" path="res://Explosion.gd" id="1_7dwj4"]
+
+[sub_resource type="Curve" id="Curve_toe88"]
+min_value = -1.0
+_data = [Vector2(0.0515464, 0.163636), 0.0, 0.0, 0, 0, Vector2(0.989691, -0.0727272), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Explosion" type="CPUParticles2D"]
+emitting = false
+amount = 50
+lifetime = 0.1
+one_shot = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 192.01
+initial_velocity_max = 444.53
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+color = Color(1, 0.192157, 0.0117647, 1)
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_toe88")
+script = ExtResource("1_7dwj4")

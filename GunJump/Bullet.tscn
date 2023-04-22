@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3sgfntu71bnq"]
+
+[ext_resource type="Script" path="res://Bullet.gd" id="1_0gn37"]
+[ext_resource type="Texture2D" uid="uid://d2m36d6qpb4yi" path="res://icon.svg" id="2_rp80k"]
+[ext_resource type="PackedScene" uid="uid://bnintuynse05e" path="res://Explosion.tscn" id="3_p5dgi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hv606"]
+radius = 70.7107
+
+[node name="Bullet" type="Area2D" groups=["bullet"]]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_0gn37")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.639216, 0.372549, 0.364706, 1)
+texture = ExtResource("2_rp80k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hv606")
+
+[node name="Explosion" parent="." groups=["bullet"] instance=ExtResource("3_p5dgi")]
+scale = Vector2(1, 1)
+emitting = true
+one_shot = false
+power = 300
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

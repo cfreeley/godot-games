@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3d2e0i4lrmca"]
+
+[ext_resource type="Script" path="res://Level.gd" id="1_85vt8"]
+[ext_resource type="PackedScene" uid="uid://daamck1uhpyfn" path="res://Hero.tscn" id="1_lp7k4"]
+[ext_resource type="Texture2D" uid="uid://d2m36d6qpb4yi" path="res://icon.svg" id="1_lq7ne"]
+[ext_resource type="PackedScene" uid="uid://c1ib6ifep54m5" path="res://Enemy.tscn" id="3_bjon6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wech1"]
+texture = ExtResource("1_lq7ne")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_n35dd"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_wech1")
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_85vt8")
+
+[node name="Hero" parent="." instance=ExtResource("1_lp7k4")]
+position = Vector2(221, 475)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_n35dd")
+format = 2
+layer_0/tile_data = PackedInt32Array(262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262163, 0, 0, 262164, 0, 0, 262165, 0, 0, 262166, 0, 0, 262167, 0, 0, 262168, 0, 0, 262169, 0, 0, 262170, 0, 0, 262171, 0, 0, 262172, 0, 0, 262173, 0, 0, 262174, 0, 0, 262175, 0, 0, 262176, 0, 0, 262177, 0, 0, 262178, 0, 0, 262179, 0, 0, 262180, 0, 0, 262181, 0, 0, 262182, 0, 0, 262183, 0, 0, 262184, 0, 0, 262185, 0, 0, 262186, 0, 0, 262187, 0, 0, 262188, 0, 0, 262189, 0, 0, 262190, 0, 0, 262191, 0, 0, 262192, 0, 0, 262193, 0, 0, 262194, 0, 0, 262195, 0, 0, 262196, 0, 0, 262197, 0, 0, 262198, 0, 0, 262199, 0, 0, 262200, 0, 0, 262201, 0, 0, 262202, 0, 0, 262203, 0, 0, 262204, 0, 0, 262205, 0, 0, 262206, 0, 0, 262207, 0, 0, 262208, 0, 0, 262209, 0, 0, 262210, 0, 0, 262211, 0, 0, 262212, 0, 0, 262213, 0, 0, 262214, 0, 0, 262215, 0, 0, 196608, 0, 0, 131072, 0, 0, 65536, 0, 0, 0, 0, 0, -65536, 0, 0, -131072, 0, 0, -196608, 0, 0, -262144, 0, 0, -327680, 0, 0, -393216, 0, 0, -458752, 0, 0, -524288, 0, 0, -589824, 0, 0, -655360, 0, 0, -720896, 0, 0, -786432, 0, 0, -851968, 0, 0, -917504, 0, 0, -983040, 0, 0, -1048576, 0, 0, -1114112, 0, 0, -1179648, 0, 0, -1245184, 0, 0, 196614, 0, 0, 131078, 0, 0, 196619, 0, 0, 131083, 0, 0, 65547, 0, 0, 196637, 0, 0)
+
+[node name="Enemy" parent="." instance=ExtResource("3_bjon6")]
+position = Vector2(1472, 98)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_bjon6")]
+position = Vector2(2487, 478)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_bjon6")]
+position = Vector2(830, 224)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(192, 480)
+
+[connection signal="player_dead" from="." to="." method="_on_player_dead"]

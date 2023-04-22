@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://daamck1uhpyfn"]
+
+[ext_resource type="Script" path="res://Hero.gd" id="1_sym3h"]
+[ext_resource type="Texture2D" uid="uid://d2m36d6qpb4yi" path="res://icon.svg" id="2_s3k47"]
+[ext_resource type="PackedScene" uid="uid://bnintuynse05e" path="res://Explosion.tscn" id="3_pd06s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_if7gr"]
+size = Vector2(128, 128)
+
+[node name="Hero" type="CharacterBody2D"]
+position = Vector2(397, 128)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_sym3h")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_s3k47")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_if7gr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="SpeedLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer"]
+offset_left = 32.0
+offset_top = 22.0
+offset_right = 106.0
+offset_bottom = 62.0
+bbcode_enabled = true
+text = "[color=blue]0"
+
+[node name="GunExplosion" parent="." instance=ExtResource("3_pd06s")]
