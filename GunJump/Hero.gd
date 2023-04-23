@@ -21,8 +21,8 @@ var shotgun = {
 }
 
 var loadout = {
-  MOUSE_BUTTON_LEFT: pistol,
-  MOUSE_BUTTON_RIGHT: shotgun
+  "primary": pistol,
+  "secondary": shotgun
 }
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -32,6 +32,8 @@ var bullet = preload("res://Bullet.tscn")
 var direction = 0
 var speed = 0
 var is_aim_locked = true
+var controller_mode = false
+var last_aim = Vector2.ZERO
 var laser_pos = Vector2.ZERO
 
 func _physics_process(delta):
@@ -74,13 +76,28 @@ func _physics_process(delta):
     get_parent().emit_signal("player_dead")
   
 func _input(event):
-    if event is InputEventMouseButton and event.pressed:
-        var fired_weapon = loadout.get(event.button_index)
-        if (fired_weapon and fired_weapon.cur_reload <= 0):
-            shoot(fired_weapon, event.position)
+    if event is InputEventJoypadMotion:
+      controller_mode = true
+      var control_dir = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
+      if (control_dir.length() > .5):
+        last_aim = control_dir.normalized()
+    elif event is InputEventMouseMotion:
+      controller_mode = false
 
 func _process(delta):
     queue_redraw()
+    
+    var fired_weapon
+    if Input.is_action_just_pressed("shoot_primary"):
+      print('?')
+      fired_weapon = loadout.get("primary")
+    elif Input.is_action_just_pressed("shoot_secondary"):
+      fired_weapon = loadout.get("secondary")  
+    if (fired_weapon and fired_weapon.cur_reload <= 0):
+      shoot(fired_weapon)
+        
+    is_aim_locked = Input.is_action_pressed("toggle_aim_lock")
+    
     for weapon in loadout:
       loadout[weapon].cur_reload -= delta
 
@@ -94,6 +111,8 @@ func _draw():
 
 func get_mouse_angle():
   var delta_vel: Vector2 = (get_global_mouse_position()-position).normalized()
+  if (controller_mode):
+     delta_vel = last_aim
   
   if (is_aim_locked):
     var rounded_angle = round(delta_vel.angle() / (TAU/12)) * (TAU/12)
@@ -114,7 +133,7 @@ func get_net_speed(pspd, bspd):
   else:
     return bspd
 
-func shoot(weapon, pos):
+func shoot(weapon):
   weapon.cur_reload = weapon.fire_rate
   var delta_vel = get_mouse_angle()
   var impact_vel = delta_vel * -weapon.force

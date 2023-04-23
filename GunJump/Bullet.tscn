@@ -19,7 +19,6 @@ texture = ExtResource("2_rp80k")
 shape = SubResource("CircleShape2D_hv606")
 
 [node name="Explosion" parent="." groups=["bullet"] instance=ExtResource("3_p5dgi")]
-scale = Vector2(1, 1)
 emitting = true
 one_shot = false
 power = 300
