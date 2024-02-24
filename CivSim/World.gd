@@ -7,29 +7,37 @@ var TileColors = {
   "Forest": [ Color.DARK_GREEN, Color.YELLOW_GREEN, Color.GREEN, Color.DARK_GREEN, Color.DARK_GREEN, Color.DARK_GREEN, Color.DARK_GREEN ],
   "Mountain": [ Color.SADDLE_BROWN, Color.SANDY_BROWN, Color.YELLOW, Color.SADDLE_BROWN, Color.SADDLE_BROWN, Color.SANDY_BROWN, Color.SADDLE_BROWN ],
   "River": [ Color.BLUE, Color.DARK_BLUE, Color.STEEL_BLUE, Color.BLUE, Color.BLUE, Color.DARK_BLUE, Color.STEEL_BLUE ],
+  "Town": [ Color.SILVER ]
 }
 
 class Tile:
   var type = "Plain"
+  var tribe = null
   var coord
   func _init(in_coord):
     coord = in_coord
 
+func get_hex_points(hex: Tile):
+  var hex_w = sqrt(3)
+  var hex_h = 2
+  return [
+    Vector2(0, -hex_h / 2), # top
+    Vector2(hex_w / 2, -hex_h * .25), # top right
+    Vector2(hex_w / 2, hex_h * .25), # bottom right
+    Vector2(0, hex_h / 2), # bottom
+    Vector2(-hex_w / 2, hex_h * .25), # bottom left
+    Vector2(-hex_w / 2, -hex_h * .25), # top left
+    Vector2(0, -hex_h / 2), # top
+  ]
+
 func draw_tile(hex: Tile, pos: Vector2, size: float):
-  var hex_w = size * sqrt(3)
-  var hex_h = size * 2
-  var points = PackedVector2Array([
-    pos + Vector2(0, -hex_h / 2), # top
-    pos + Vector2(hex_w / 2, -hex_h * .25), # top right
-    pos + Vector2(hex_w / 2, hex_h * .25), # bottom right
-    pos + Vector2(0, hex_h / 2), # bottom
-    pos + Vector2(-hex_w / 2, hex_h * .25), # bottom left
-    pos + Vector2(-hex_w / 2, -hex_h * .25), # top left
-    pos + Vector2(0, -hex_h / 2), # top
-  ])
+  var points = get_hex_points(hex).map(func(pt): return (pt * size) + pos)
   TileColors[hex.type].shuffle()
-  draw_polygon(points, PackedColorArray(TileColors[hex.type]))
-#  draw_polyline(points, Color.BLACK)
+  draw_polygon(PackedVector2Array(points), PackedColorArray(TileColors[hex.type]))
+  if hex.tribe != null:
+    var col: Color = hex.tribe
+    col.a = .4
+    draw_polygon(PackedVector2Array(points), PackedColorArray([col]))
   
 var TileGrid = {}
 var zoom = 0
@@ -55,6 +63,9 @@ func build_grid():
     grow_forest(get_rand_tile())
   while get_diversity() < .4:
     grow_mountain(get_rand_tile())
+  var towns_to_build = 25
+  while towns_to_build > 0:
+    towns_to_build -= 1 if build_town(get_rand_tile()) else 0
       
 func get_neighbors(hex: Tile):
   var neighbors = []
@@ -100,16 +111,69 @@ func grow_forest(hex: Tile, odds = .99):
     hex.type = "Forest"
     for h in get_neighbors(hex):
       grow_forest(h, odds * .8)
+      
+func build_town(hex: Tile):
+  var num_resources = {}
+  for h in get_neighbors(hex):
+    if !num_resources.has(h.type):
+      num_resources[h.type] = 0
+    num_resources[h.type] += 1
+  if num_resources.size() >= 2 && (num_resources.size() / 4.0) > randf():
+    hex.type = "Town"
+    return true
+  return false
+
+var Tribe = {}
+func add_tribe(hex: Tile):
+  if Tribe.is_empty():
+    Tribe[hex.coord] = hex
+    hex.tribe = Color.MAGENTA
+  else:
+    for n in get_neighbors(hex):
+      if n.tribe == Color.MAGENTA:
+        Tribe[hex.coord] = hex
+        hex.tribe = Color.MAGENTA
+
+func get_size(): return 16 * pow(2.0, (zoom / 4.0))
+func get_hor_spacing(): return (get_size() * sqrt(3))
+func get_ver_spacing(): return (get_size() * (3.0/2))
+var hor_offset = 0
+var ver_offset = 0
+
+func coord_to_pos(c: Vector2):
+  return Vector2(((c.x / 2) * get_hor_spacing()) + hor_offset, (c.y * get_ver_spacing()) + ver_offset)
+
+func draw_tribe():
+  var pt_dict = {}
+  for h in Tribe:
+    var ml_pts: Array = get_hex_points(Tribe[h]).reduce(func (acc, pt): # turn hex pts into multiline
+      acc.append_array([pt, pt])
+      return acc, [])
+    ml_pts.pop_back(); ml_pts.pop_front(); # only middle duped
+    var test = {
+      Vector2(1,1): 5,
+      [1,2]: 4
+    }
+    pt_dict = ml_pts.reduce(func (acc: Dictionary, coord: Vector2):
+      var pt = (coord*get_size()) + coord_to_pos(Tribe[h].coord)
+      if acc.is_empty() or !acc.has("hold"):
+        acc.hold = pt.round()
+        return acc
+      var pair = [acc.hold, pt.round()]
+      pair.sort()
+      acc.erase("hold")
+      acc[pair] = acc.has(pair)
+      return acc, pt_dict.duplicate()) # [ [a, b] [a, b] ]
+  var flat_pts = pt_dict.keys().filter(func(key): return !pt_dict[key]).reduce(func(acc, pair):
+    acc.append_array(pair)
+    return acc, [])
+  draw_multiline(PackedVector2Array(flat_pts), Color.MAGENTA, 4)
 
 func _draw():
-  var size = 16 * pow(2.0, (zoom / 4.0))
-  var hor_spacing = (size * sqrt(3))
-  var ver_spacing = (size * (3.0/2))
-  var hor_offset = 0
-  var ver_offset = 0
   for coord in TileGrid:
     var tile = TileGrid[coord]
-    draw_tile(tile, Vector2(((coord.x / 2) * hor_spacing) + hor_offset, (coord.y * ver_spacing) + ver_offset), size)
+    draw_tile(tile, coord_to_pos(coord), get_size())
+  draw_tribe()
     
 func _input(event):
   if event is InputEventMouseButton:
@@ -119,4 +183,14 @@ func _input(event):
     elif event.button_index == 5:
         zoom -= 1
         queue_redraw()
-
+    elif event.button_index == 1:
+      var pos = event.position
+      var orig_grid_x = ((pos.x - hor_offset) / get_hor_spacing()) * 2
+      var grid_x = round(orig_grid_x)
+      var grid_y = round((pos.y - ver_offset) / get_ver_spacing())
+      if (int(grid_x) + int(grid_y)) % 2 != 0:
+        grid_x += 1 if grid_x < orig_grid_x else -1 # round to nearest hex
+      var grid_pos = Vector2(grid_x, grid_y)
+      if TileGrid.has(grid_pos):
+        add_tribe(TileGrid[grid_pos])
+        queue_redraw()
