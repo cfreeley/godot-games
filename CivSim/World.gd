@@ -50,8 +50,8 @@ func get_diversity():
     return acc + (1.0 if h.type != "Plain" else 0.0), 0.0)) / TileGrid.size()
   
 func build_grid():
-  var num_rows = 100
-  var num_cols = 100
+  var num_rows = 64
+  var num_cols = 64
   for row in num_rows:
     for col in num_cols:
       var offset = 0 if row % 2 == 0 else 1

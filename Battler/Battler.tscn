@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh0wqmrwjd5lh"]
+
+[ext_resource type="Script" path="res://Battler.gd" id="1_en165"]
+
+[node name="Battler" type="Node2D"]
+script = ExtResource("1_en165")
