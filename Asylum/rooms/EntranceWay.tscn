@@ -1,0 +1,8 @@
+[gd_scene load_steps=4 format=3 uid="uid://curi8qhd611rn"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_fssgo"]
+[ext_resource type="Resource" uid="uid://tdpwp8gygh68" path="res://rooms/EntranceWay.dialogue" id="2_6va1t"]
+
+[node name="EntranceWay" instance=ExtResource("1_fssgo")]
+room_title = "Basement Entrance"
+room_diag = ExtResource("2_6va1t")

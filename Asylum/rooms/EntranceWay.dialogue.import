@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://tdpwp8gygh68"
+path="res://.godot/imported/EntranceWay.dialogue-851a3d9438ad76f767dd70e6de3e9a1e.tres"
+
+[deps]
+
+source_file="res://rooms/EntranceWay.dialogue"
+dest_files=["res://.godot/imported/EntranceWay.dialogue-851a3d9438ad76f767dd70e6de3e9a1e.tres"]
+
+[params]
+
+defaults=true
