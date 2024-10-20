@@ -19,7 +19,10 @@ config/icon="res://icon.svg"
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Global="*res://Global.gd"
-Dungeon="*res://Dungeon.tscn"
+
+[dialogue_manager]
+
+general/balloon_path="res:///balloon.tscn"
 
 [display]
 

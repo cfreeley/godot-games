@@ -31,13 +31,13 @@ const DialogueLine = preload("./dialogue_line.gd")
 ## be a title string or a stringified line number). Runs any mutations along the way and then returns
 ## the first dialogue line encountered.
 func get_next_dialogue_line(title: String, extra_game_states: Array = [], mutation_behaviour: _DialogueManager.MutationBehaviour = _DialogueManager.MutationBehaviour.Wait) -> DialogueLine:
-	return await Engine.get_singleton("DialogueManager").get_next_dialogue_line(self, title, extra_game_states, mutation_behaviour)
+  return await Engine.get_singleton("DialogueManager").get_next_dialogue_line(self, title, extra_game_states, mutation_behaviour)
 
 
 ## Get the list of any titles found in the file.
 func get_titles() -> PackedStringArray:
-	return titles.keys()
+  return titles.keys()
 
 
 func _to_string() -> String:
-	return "<DialogueResource titles=\"%s\">" % [",".join(titles.keys())]
+  return "<DialogueResource titles=\"%s\">" % [",".join(titles.keys())]

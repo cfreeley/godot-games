@@ -1,11 +1,6 @@
-~ this_is_a_node_title
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => this_is_a_node_title
-- End the conversation => END
-Nathan: For more information see the online documentation.
+~ intro
+You are in the southern corridor of the basement. In front of you are the stairs leading up, but they are locked behind a grated door.
 => END
+
+~ investigate
+The door doesn't budge. It looks like you'll need the guard's key to open it.
