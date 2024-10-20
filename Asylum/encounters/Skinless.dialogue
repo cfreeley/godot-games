@@ -1,0 +1,13 @@
+~ intro
+A grinning man with no skin lunges at you.
+- Attack
+- Evade
+- Retreat
+=> END!
+
+~ attack
+% The man stabs your [[arm|side|leg]] with a rusty knife.
+% The man slashes at your [[arm|eye|nose|cheek]] with long fingernails.
+% The man throws a sucker punch straight to your [[stomach|nose|lip|chin]].
+% The man takes a bite out of your [[shoulder|side|ear|leg]].
+=> END!

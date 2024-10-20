@@ -2,18 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_fssgo"]
 [ext_resource type="Resource" uid="uid://tdpwp8gygh68" path="res://rooms/EntranceWay.dialogue" id="2_6va1t"]
-[ext_resource type="Shader" path="res://SpriteShader.gdshader" id="3_bnxr2"]
 [ext_resource type="Texture2D" uid="uid://bbu4svw06y24f" path="res://img/scvm3.png" id="3_ker0i"]
+[ext_resource type="PackedScene" uid="uid://drwugmpukxcrf" path="res://encounters/Encounter.tscn" id="5_h5qau"]
+[ext_resource type="Resource" uid="uid://bo04bl7pij8ak" path="res://encounters/Skinless.dialogue" id="6_4x6sj"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ct8j1"]
-shader = ExtResource("3_bnxr2")
-
-[node name="EntranceWay" instance=ExtResource("1_fssgo")]
+[node name="EntranceWay" node_paths=PackedStringArray("encounter") instance=ExtResource("1_fssgo")]
 room_title = "Basement Entrance"
 room_diag = ExtResource("2_6va1t")
+encounter = NodePath("Encounter")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-material = SubResource("ShaderMaterial_ct8j1")
-position = Vector2(360, 360)
-scale = Vector2(0.5, 0.5)
+[node name="Encounter" parent="." index="0" instance=ExtResource("5_h5qau")]
 texture = ExtResource("3_ker0i")
+title = "Skinless Inmate"
+diag = ExtResource("6_4x6sj")
+
+[editable path="Encounter"]
