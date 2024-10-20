@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxktd0e5nkgql"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_meomv"]
+[ext_resource type="Resource" uid="uid://b0irujt3l3s2m" path="res://rooms/EmptyHall.dialogue" id="2_mp2og"]
+
+[node name="EmptyHall" instance=ExtResource("1_meomv")]
+room_title = "Hallway"
+room_diag = ExtResource("2_mp2og")
