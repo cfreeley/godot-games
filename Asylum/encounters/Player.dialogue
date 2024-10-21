@@ -49,3 +49,21 @@ elif roll_delta < 3:
 else:
 	You slip out unseen.
 => END!
+
+# Encounters
+
+~ skinless
+A grinning man with no skin lunges at you.
+=> combat
+
+~ wretched
+A horrific woman covered in black tendrils looks you in the eye and begins to screech.
+=> combat
+
+~ brute
+A large man with a swolen body grins at you with malice.
+=> combat
+
+~ eyeless
+A creature with no eyes paces around, listening intently.
+=> combat

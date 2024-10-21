@@ -1,0 +1,13 @@
+~ intro
+You enter a cell with a makeshift altar to Saint Irulan. You feel calm in her presence.
+=> END!
+
+~ investigate
+Saint Irulan the Grotesque is the patron saint of the inmates here. Her statue is leaking greenish water from her eyes.
+Drink the water?
+- Yes
+	You feel rejuvenated.
+	set PlayerStats.Health = 7
+	do Global.update_health.emit()
+- No
+=> END!

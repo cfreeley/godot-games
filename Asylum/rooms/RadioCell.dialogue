@@ -1,0 +1,29 @@
+~ intro
+You enter an empty cell. There is a table with a few belongings arranged neatly.
+=> END!
+
+~ investigate
+if HasHeardRadio:
+	The guard is no longer talking on the walkie, but it would be hard to forget his words. Toggle the "Observation" switch in the northeast security room, and don't toggle the "Containment" switch.
+	=> END!
+You see a walkie-talkie on the desk. You put it up to your ears and hear a voice.
+???: Attention, attention. This is Corporal Fange, does anyone copy?
+- "Hello."
+	=> radio
+- Don't respond
+=> END!
+
+~ radio
+Fange: About goddamn time! I need assistance. I'm holed up in the Observation Room. It's at the end of the west corridor. Once all the shit hit the fan the electric security doors locked, and now I can't get out.
+Fange: I need you go to the security room in the Northeast junction and unlock it. There should be a control panel there, you just have to toggle the switch. Even one of you numb nuts couldn't fuck it up.
+Fange: The thing is... and I want to be really goddamn clear about this... you cannot toggle the switch marked "Containment". Only the switch marked "Observation". You got that?
+- "Yes."
+- Don't respond
+Fange: I'm gonna need an affirmative fucking answer from you pal. Toggle the "Observation" switch AND NOT the "Containment" switch. Can you repeat that back to me?
+- "Toggle the Observation switch"
+	Fange: [speed=0.2]Gooood. [speed=1.0]There you go pal. Even you can't fuck up something that simple, huh? Now hurry, I'm getting cramped in here.
+- "Toggle the Containment switch"
+	Fange: Fuck. Dumb Shit. Forget it, I'll find someone else to help.
+- Don't respond
+	Fange: Hello? [wait=.5]Fuck. Dumbass.
+set HasHeardRadio = true

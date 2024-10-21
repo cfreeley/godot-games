@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://dx73xi2ww7hev"
+path="res://.godot/imported/ScratchedJunction.dialogue-8ffadfb79d89d6d1759d1150f57eac0d.tres"
+
+[deps]
+
+source_file="res://rooms/ScratchedJunction.dialogue"
+dest_files=["res://.godot/imported/ScratchedJunction.dialogue-8ffadfb79d89d6d1759d1150f57eac0d.tres"]
+
+[params]
+
+defaults=true

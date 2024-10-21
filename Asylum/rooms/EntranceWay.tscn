@@ -15,6 +15,7 @@ encounter = NodePath("Encounter")
 texture = ExtResource("3_ker0i")
 title = "Skinless Inmate"
 diag = ExtResource("6_4x6sj")
+en_name = "skinless"
 en_hp = 2
 en_might = 1
 en_dmg = 1

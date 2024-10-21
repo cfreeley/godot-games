@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcarwnoxew2wb"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_swu3s"]
+[ext_resource type="Resource" uid="uid://sjaupdelgaoy" path="res://rooms/RadioCell.dialogue" id="2_8aq3v"]
+
+[node name="RadioCell" instance=ExtResource("1_swu3s")]
+room_title = "Old Man's Cell"
+room_diag = ExtResource("2_8aq3v")

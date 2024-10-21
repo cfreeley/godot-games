@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6uvejgc76ihg"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_db5bx"]
+[ext_resource type="Resource" uid="uid://bqx8rx0pwnax8" path="res://rooms/Office.dialogue" id="2_s6uwy"]
+
+[node name="Office" instance=ExtResource("1_db5bx")]
+room_title = "Office"
+room_diag = ExtResource("2_s6uwy")

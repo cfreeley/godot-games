@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bgqm4wpmccc8f"
+path="res://.godot/imported/PaddedRoom.dialogue-b430321b1c616e053c734a73f0b2493c.tres"
+
+[deps]
+
+source_file="res://rooms/PaddedRoom.dialogue"
+dest_files=["res://.godot/imported/PaddedRoom.dialogue-b430321b1c616e053c734a73f0b2493c.tres"]
+
+[params]
+
+defaults=true

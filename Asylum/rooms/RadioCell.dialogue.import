@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://sjaupdelgaoy"
+path="res://.godot/imported/RadioCell.dialogue-3948ecb3a423e02d84b02e3b2889f98a.tres"
+
+[deps]
+
+source_file="res://rooms/RadioCell.dialogue"
+dest_files=["res://.godot/imported/RadioCell.dialogue-3948ecb3a423e02d84b02e3b2889f98a.tres"]
+
+[params]
+
+defaults=true

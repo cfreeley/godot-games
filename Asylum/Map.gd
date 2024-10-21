@@ -37,7 +37,7 @@ func _draw():
     var coord = Vector2(loc.x, loc.y)
     var pos = getPos.call(loc)
     var size = Vector2(w, h)
-    var fillCol = Color.BLACK
+    var fillCol = Color.BLACK # if Global.Map.get(loc).room_title == "Hallway" else Color.PINK
     if Global.SeenRooms.has(coord):
       fillCol = Color.YELLOW if coord == Global.CurrentLoc else Color.BLUE
     draw_rect(Rect2(pos, size), fillCol, true)

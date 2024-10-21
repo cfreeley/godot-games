@@ -4,5 +4,5 @@
 [ext_resource type="Resource" uid="uid://pui3344viyrx" path="res://rooms/RiddleHall.dialogue" id="2_3d0u2"]
 
 [node name="RiddleHall" instance=ExtResource("1_6ge2l")]
-room_title = "EastCorridor"
+room_title = "East Corridor"
 room_diag = ExtResource("2_3d0u2")

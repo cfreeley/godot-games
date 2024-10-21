@@ -1,0 +1,19 @@
+~ intro
+You enter an office room. It looks like it was ransacked; drawers are left open, loose papers and empty folders scatter the floor, the chair is toppled over.
+=> END!
+
+~ investigate
+Most of the remaining papers don't seem very interesting, but one catches your eye.
+It's titled "Doctor's Notes - Patient 5B". Read it?
+- Yes
+	=> note
+- No
+=> END!
+
+~ note
+7/1\: 5B is docile today, so I struck up a conversation with her. She told me that her vision has been foggy lately, and she appears to see things with a red-hue.
+7/19\: 5B has been pleasant lately so I took her on a field trip to the yard. Big mistake. She got violent as soon as we stepped outside. Needed an orderly to come and sedate her.
+7/20\: I did remember one other thing from the incident yesterday. She was upset at the colors, complaining they were "all wrong". Probably on account of her recent ocular issues.
+8/6\: The swelling in her veins keeps getting worse, but none of us can't treat her because she's too agressive. None of our sedatives seem to work anymore.
+9/3\: 5B is a lost cause. Confined her to the solitary until we figure out what to do with her.
+=> END!

@@ -21,7 +21,6 @@ func get_item(item):
   print(Global.Weapons[item], item)
 
 func move_by(dir):
-  print('move')
   enter_room(Global.CurrentLoc + dir)
   
 func retreat():
@@ -86,8 +85,8 @@ func toggle_map(on):
     $CanvasLayer/AnimationPlayer.play_backwards("fadein")
 
 func update_health():
+  print("update")
   $CanvasLayer/GUI/Panel/HBoxContainer/HealthLabel.text = "%s HP" % Global.PlayerStats.Health
-
 
 func _on_inventory_button_pressed():
   var visible = !$CanvasLayer/Menu.visible

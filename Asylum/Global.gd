@@ -79,17 +79,17 @@ var NE_Corner = Back + RIGHT
 var Map := {
   Start: preload("res://rooms/PlayerCell.tscn").instantiate(),
   Entrance: preload("res://rooms/EntranceWay.tscn").instantiate(),
-  SE_Corner: preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (SE_Corner + DOWN): preload("res://rooms/EmptyHall.tscn").instantiate(),
+  SE_Corner: preload("res://rooms/ScratchedJunction.tscn").instantiate(),
+  (SE_Corner + DOWN): preload("res://rooms/Sanctum.tscn").instantiate(),
   SW_Corner: preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (SW_Corner + DOWN): preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (SW_Corner + LEFT): preload("res://rooms/EmptyHall.tscn").instantiate(),
+  (SW_Corner + DOWN): preload("res://rooms/RadioCell.tscn").instantiate(),
+  (SW_Corner + LEFT): preload("res://rooms/AnarchistRoom.tscn").instantiate(),
   Center: preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (Center + LEFT): preload("res://rooms/EmptyHall.tscn").instantiate(),
+  (Center + LEFT): preload("res://rooms/ScratchedJunction.tscn").instantiate(),
   (Center + RIGHT): preload("res://rooms/RiddleHall.tscn").instantiate(),
-  (Center + RIGHT + RIGHT): preload("res://rooms/EmptyHall.tscn").instantiate(),
+  (Center + RIGHT + RIGHT): preload("res://rooms/PaddedRoom.tscn").instantiate(),
   Back: preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (Back + UP): preload("res://rooms/EmptyHall.tscn").instantiate(),
+  (Back + UP): preload("res://rooms/Office.tscn").instantiate(),
   NE_Corner: preload("res://rooms/EmptyHall.tscn").instantiate(),
   (NE_Corner + UP): preload("res://rooms/EmptyHall.tscn").instantiate(),
   NW_Corner: preload("res://rooms/EmptyHall.tscn").instantiate(),
@@ -133,3 +133,6 @@ func get_door(l1, l2):
 
 var SeenRooms := {}
 var CanMove := {}
+var HasIncantation := false
+var HasHeardRadio := false
+var HasMolotov = null

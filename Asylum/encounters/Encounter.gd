@@ -3,6 +3,7 @@ extends Node2D
 @export var texture : Texture2D
 @export var title : String
 @export var diag : DialogueResource
+@export var en_name : String
 @export var en_hp : int # initial hp
 @export var en_might : int
 @export var en_agility : int
@@ -25,14 +26,12 @@ func start():
   Global.EncounterHp = en_hp
   en_hostile = true
   $AnimationPlayer.play("fadein")
-  balloon = DialogueManager.show_dialogue_balloon(diag, "intro" )
+  balloon = DialogueManager.show_dialogue_balloon(player_diag, en_name )
 
 func _diag_end(diagResource):
   if !is_active:
     return;
-  if (diagResource == diag):
-    DialogueManager.show_dialogue_balloon(player_diag, "combat" )
-  elif diagResource == player_diag && Global.CurrentAction != null:
+  if diagResource == player_diag && Global.CurrentAction != null:
     match Global.CurrentAction:
       "attack":
         attack()
