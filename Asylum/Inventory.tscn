@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=3 uid="uid://hpcbyqqorcjj"]
+
+[ext_resource type="Script" path="res://Inventory.gd" id="1_7qteo"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_7os3q"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7qteo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 58.0
+offset_bottom = -276.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 19
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Player: Inmate"
+
+[node name="Stats" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Strength: 2
+Agility: 1
+Arcana: 0
+Health: 7
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Inventory" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Heading" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Inventory"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Inventory"
+
+[node name="Items" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Inventory"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/Inventory/Items"]
+layout_mode = 2
+size_flags_horizontal = 0
+button_group = SubResource("ButtonGroup_7os3q")
+text = "Knife"
+
+[node name="CheckBox2" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/Inventory/Items"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Pistol"
+
+[node name="CheckBox3" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/Inventory/Items"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Shotgun"
+
+[node name="Keys" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Heading" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Keys"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Keys"
+
+[node name="Items" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Keys"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Keys/Items"]
+layout_mode = 2
+text = "Rusty Key"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Keys/Items"]
+layout_mode = 2
+text = "Guard's Key"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

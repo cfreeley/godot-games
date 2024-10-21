@@ -14,11 +14,15 @@ signal enemy_dead()
 @warning_ignore("unused_signal")
 signal gain_key()
 @warning_ignore("unused_signal")
+signal gain_item()
+@warning_ignore("unused_signal")
 signal toggle_map(on : bool)
 @warning_ignore("unused_signal")
 signal retreat()
 @warning_ignore("unused_signal")
 signal update_health()
+@warning_ignore("unused_signal")
+signal open_inventory()
 
 var PlayerStats := {
   'Might': 2,
@@ -27,9 +31,28 @@ var PlayerStats := {
   'Health': 6
 }
 
+var Weapons := {
+  "Fist": {
+    "damage": 1,
+    "owned": true
+  },
+  "Knife": {
+    "damage": 2,
+  },
+  "Lead Pipe": {
+    "damage": 3,
+  },
+  "Pistol": {
+    "damage": 2,
+  },
+  "Shotgun": {
+    "damage": 4,
+  }
+}
+
 var CurrentAction
 var CurrentLoc : Vector2
-var CurrentWeapon := "fist"
+var CurrentWeapon := "Fist"
 var WeaponDamage := 1
 var EncounterName : String
 var EncounterHp : int
@@ -81,15 +104,15 @@ var riddle2 = false
 var riddle3 = false
 
 var Doors := {
-  [Start, Entrance]: 'rusty',
-  [Entrance, Center]: 'guard',
+  [Start, Entrance]: 'Rusty Key',
+  [Entrance, Center]: "Guard's Key",
   [Entrance, SW_Corner]: null,
   [SW_Corner, SW_Corner + DOWN]: null,
   [SW_Corner, SW_Corner + LEFT]: null,
   [Entrance, SE_Corner]: null,
   [SW_Corner, Center + LEFT]: null,
   [SE_Corner, Center + RIGHT]: null,
-  [Center + RIGHT, Center + RIGHT + RIGHT]: 'riddle',
+  [Center + RIGHT, Center + RIGHT + RIGHT]: "Witch's Key",
   [SE_Corner, SE_Corner + DOWN]: null,
   [NW_Corner, Center + LEFT]: null,
   [NE_Corner, Center + RIGHT]: null,
@@ -97,7 +120,7 @@ var Doors := {
   [NE_Corner, Back]: null,
   [NE_Corner, NE_Corner + UP]: null,
   [NW_Corner, Back]: null,
-  [NW_Corner, NW_Corner + UP]: 'security',
+  [NW_Corner, NW_Corner + UP]: "Security Override B",
   [NW_Corner + UP, NW_Corner + UP + LEFT]: null,
 }
 

@@ -7,6 +7,7 @@ func _ready():
   $CanvasLayer/MainMenu.show()
   Global.room_move.connect(move_by)
   Global.gain_key.connect(get_key)
+  Global.gain_item.connect(get_item)
   Global.toggle_map.connect(toggle_map)
   Global.retreat.connect(retreat)
   Global.update_health.connect(update_health)
@@ -14,6 +15,9 @@ func _ready():
 func get_key(key):
   Global.Keys[key] = true
   update_can_move()
+
+func get_item(item):
+  Global.Weapons[item].owned = true
 
 func move_by(dir):
   print('move')
@@ -53,17 +57,17 @@ var input_to_dir = {
   "ui_right": Global.RIGHT,
 }
 
-func _unhandled_input(event):
-  if event.is_action_pressed("investigate"):
-    CurrentRoom.investigate()
-  else:
-    for action in input_to_dir.keys():
-      if event.is_action_pressed(action):
-        var dir = input_to_dir[action]
-        var new_loc = Global.CurrentLoc + dir
-        var door = Global.get_door(Global.CurrentLoc, new_loc)
-        if door and (Global.Doors[door] == null or Global.Keys.has(Global.Doors[door])):
-          enter_room(new_loc)
+#func _unhandled_input(event):
+  #if event.is_action_pressed("investigate"):
+    #CurrentRoom.investigate()
+  #else:
+    #for action in input_to_dir.keys():
+      #if event.is_action_pressed(action):
+        #var dir = input_to_dir[action]
+        #var new_loc = Global.CurrentLoc + dir
+        #var door = Global.get_door(Global.CurrentLoc, new_loc)
+        #if door and (Global.Doors[door] == null or Global.Keys.has(Global.Doors[door])):
+          #enter_room(new_loc)
 
 func _on_start_button_pressed():
   enter_room(Global.Start)
@@ -82,3 +86,10 @@ func toggle_map(on):
 
 func update_health():
   $CanvasLayer/GUI/Panel/HBoxContainer/HealthLabel.text = "%s HP" % Global.PlayerStats.Health
+
+
+func _on_inventory_button_pressed():
+  var visible = !$CanvasLayer/Menu.visible
+  $CanvasLayer/Menu.visible = visible
+  $CanvasLayer/Map.visible = !visible
+  Global.open_inventory.emit(visible)

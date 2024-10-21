@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlxasxhna6u47"]
+[gd_scene load_steps=12 format=3 uid="uid://dlxasxhna6u47"]
 
 [ext_resource type="Script" path="res://Dungeon.gd" id="1_4o8wi"]
 [ext_resource type="PackedScene" uid="uid://ctw8oukva4il8" path="res://MainMenu.tscn" id="2_k3a3m"]
 [ext_resource type="Script" path="res://Map.gd" id="3_8cieb"]
 [ext_resource type="Theme" uid="uid://by6o11p56lb6l" path="res://game_theme.tres" id="3_uw23p"]
+[ext_resource type="PackedScene" uid="uid://hpcbyqqorcjj" path="res://Inventory.tscn" id="5_0pboq"]
 
 [sub_resource type="Animation" id="Animation_0mek1"]
 length = 0.001
@@ -43,10 +44,22 @@ _data = {
 
 [sub_resource type="SystemFont" id="SystemFont_p4m2n"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e10e1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="Theme" id="Theme_u7alg"]
+Button/styles/normal = SubResource("StyleBoxFlat_e10e1")
+
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_4o8wi")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 101
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("2_k3a3m")]
 offset_left = -1.0
@@ -62,8 +75,12 @@ libraries = {
 "": SubResource("AnimationLibrary_hl1yx")
 }
 
+[node name="Menu" parent="CanvasLayer" instance=ExtResource("5_0pboq")]
+visible = false
+
 [node name="GUI" type="Control" parent="CanvasLayer"]
 visible = false
+z_index = 100
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -73,7 +90,7 @@ theme = ExtResource("3_uw23p")
 [node name="Panel" type="Panel" parent="CanvasLayer/GUI"]
 layout_mode = 0
 offset_right = 720.0
-offset_bottom = 33.0
+offset_bottom = 51.0
 theme = ExtResource("3_uw23p")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/Panel"]
@@ -83,7 +100,7 @@ anchor_right = 1.0
 offset_left = 14.0
 offset_top = 4.0
 offset_right = -6.0
-offset_bottom = 40.0
+offset_bottom = 26.0
 grow_horizontal = 2
 
 [node name="RoomLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
@@ -101,9 +118,23 @@ size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0.545098, 1)
 theme_override_fonts/normal_font = SubResource("SystemFont_p4m2n")
 theme_override_font_sizes/normal_font_size = 18
-text = "7hp
+text = "6 HP
 "
 
+[node name="WeaponLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0.545098, 1)
+theme_override_fonts/normal_font = SubResource("SystemFont_p4m2n")
+theme_override_font_sizes/normal_font_size = 18
+text = "Weapon: Fist"
+
+[node name="InventoryButton" type="Button" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u7alg")
+text = "Inventory"
+
 [connection signal="pressed" from="CanvasLayer/MainMenu/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/Panel/HBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
 
 [editable path="CanvasLayer/MainMenu"]
