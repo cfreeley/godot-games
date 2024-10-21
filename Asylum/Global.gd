@@ -54,7 +54,7 @@ var CurrentAction
 var CurrentLoc : Vector2
 var CurrentWeapon := "Fist"
 var WeaponDamage := 1
-var EncounterName : String
+var EncounterName
 var EncounterHp : int
 
 var my_roll : int

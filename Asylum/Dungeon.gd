@@ -18,6 +18,7 @@ func get_key(key):
 
 func get_item(item):
   Global.Weapons[item].owned = true
+  print(Global.Weapons[item], item)
 
 func move_by(dir):
   print('move')

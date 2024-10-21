@@ -19,6 +19,7 @@ func enter():
   if !is_active:
     return
   if encounter == null:
+    Global.EncounterName = null
     Global.toggle_map.emit(true)
     DialogueManager.show_dialogue_balloon(room_diag, "intro")
   else:
@@ -41,10 +42,8 @@ func choose():
 func end_encounter():
   if !is_active:
     return
-  if encounter != null:
-    encounter.queue_free()
-  else:
-    print('ayo wtf????')
+  assert(encounter != null)
+  encounter.queue_free()
   encounter = null
   enter()
 

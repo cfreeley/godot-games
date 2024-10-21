@@ -1,6 +1,6 @@
 ~ choose
 What shall you do?
-- Search
+- Search [if EncounterName == null]
 	do room_investigate.emit()
 	=> END!
 - Move North [if CanMove.has(UP)]
