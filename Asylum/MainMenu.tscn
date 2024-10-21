@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://ctw8oukva4il8"]
+[gd_scene load_steps=3 format=3 uid="uid://ctw8oukva4il8"]
+
+[ext_resource type="FontFile" uid="uid://ctlgxro6c30qv" path="res://Super Rugged.ttf" id="1_106ta"]
+[ext_resource type="Theme" uid="uid://by6o11p56lb6l" path="res://game_theme.tres" id="2_3k3xe"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -8,26 +11,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="StartButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -46.5
-offset_right = 64.0
-offset_bottom = 46.5
+offset_left = -35.5
+offset_top = 20.0
+offset_right = 35.5
+offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Asylum"
-horizontal_alignment = 1
-
-[node name="StartButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+size_flags_stretch_ratio = 6.55
+theme = ExtResource("2_3k3xe")
 text = "Start"
+
+[node name="Label" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_top = 319.0
+offset_right = 720.0
+offset_bottom = 384.0
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("1_106ta")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center][shake level=1 rate=16]A S Y L U M[/shake][/center]"
+fit_content = true
+scroll_active = false

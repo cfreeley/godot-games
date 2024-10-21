@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbu4svw06y24f"
-path="res://.godot/imported/scvm3.png-dfc599eeb149d4adf8bf37fc682909c3.ctex"
+uid="uid://5ljtoufdypt8"
+path="res://.godot/imported/eyeless.png-7720e626386610ab06143ac882001204.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/scvm3.png"
-dest_files=["res://.godot/imported/scvm3.png-dfc599eeb149d4adf8bf37fc682909c3.ctex"]
+source_file="res://img/eyeless.png"
+dest_files=["res://.godot/imported/eyeless.png-7720e626386610ab06143ac882001204.ctex"]
 
 [params]
 

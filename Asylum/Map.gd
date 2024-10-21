@@ -2,10 +2,13 @@ extends Node2D
 
 func _unhandled_input(event):
   queue_redraw()
+  
+func _input(event):
+  queue_redraw()
 
-var canvas_width = 360
-var canvas_height = 360
-var canvas_pos = Vector2(720 / 2 - (canvas_width / 2), 720 / 2 - (canvas_height / 2))
+var canvas_width = 300
+var canvas_height = 300
+var canvas_pos = Vector2(720.0 / 2.0 - (canvas_width / 2.0), 720.0 / 3.0 - (canvas_height / 2.0))
 func _draw():
   var grid_w = 5
   var grid_h = 5
@@ -20,7 +23,7 @@ func _draw():
     var fillCol = Color.BLACK
     if Global.SeenRooms.has(coord):
       fillCol = Color.YELLOW if coord == Global.CurrentLoc else Color.BLUE
-    draw_rect(Rect2(pos, size), fillCol, true, 2.0)
+    draw_rect(Rect2(pos, size), fillCol, true)
     draw_rect(Rect2(pos, size), Color.DARK_BLUE, false, 2.0)  
   for door in Global.Doors.keys():
     var door_size = 16

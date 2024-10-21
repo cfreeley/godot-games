@@ -1,4 +1,51 @@
 ~ choose
+What shall you do?
+- Search
+	do room_investigate.emit()
+	=> END!
+- Move North [if CanMove.has(UP)]
+	do room_move.emit(UP)
+	=> END!
+- Move South [if CanMove.has(DOWN)]
+	do room_move.emit(DOWN)
+	=> END!
+- Move East [if CanMove.has(RIGHT)]
+	do room_move.emit(RIGHT)
+	=> END!
+- Move West [if CanMove.has(LEFT)]
+	do room_move.emit(LEFT)
+	=> END!
+=> END!
+
+~ combat
+What shall you do?
 - Attack
+	You attack with your {{CurrentWeapon}}.
+	set CurrentAction = "attack"
 - Evade
+	You attempt to slip by.
+	set CurrentAction = "evade"
 - Retreat
+	You duck back the way you came.
+	set CurrentAction = "retreat"
+=> END!
+
+~ attack
+You rolled a {{my_total}} ({{ my_roll }} + {{ PlayerStats.Might }}). The enemy rolled a {{ enemy_total }}.
+if roll_delta < 0:
+	The {{EncounterName}} overpowers you completely. You didn't even manage to hurt it.
+elif roll_delta < 3:
+	You and the {{EncounterName}} trade blows.
+else:
+	You dodge the {{EncounterName}} and manage to get a clean blow in turn.
+=> END!
+
+~ evade
+You rolled a {{my_total}} ({{ my_roll }} + {{ PlayerStats.Agility }}). The enemy rolled a {{ enemy_total }}.
+if roll_delta < 0:
+	The {{EncounterName}} pounces on you before you can attempt escape.
+elif roll_delta < 3:
+	You get a glancing blow from the {{EncounterName}} but manage to escape.
+else:
+	You slip out unseen.
+=> END!

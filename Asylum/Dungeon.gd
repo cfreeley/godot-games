@@ -1,18 +1,49 @@
 extends Node2D
 
 var CurrentRoom : Node2D
+var LastLoc : Vector2
 
 func _ready():
   $CanvasLayer/MainMenu.show()
+  Global.room_move.connect(move_by)
+  Global.gain_key.connect(get_key)
+  Global.toggle_map.connect(toggle_map)
+  Global.retreat.connect(retreat)
+  Global.update_health.connect(update_health)
+
+func get_key(key):
+  Global.Keys[key] = true
+  update_can_move()
+
+func move_by(dir):
+  print('move')
+  enter_room(Global.CurrentLoc + dir)
+  
+func retreat():
+  enter_room(LastLoc)
+  
+func update_can_move():
+  Global.CanMove = {}
+  for dir in input_to_dir.values():
+      var new_loc = Global.CurrentLoc + dir
+      var door = Global.get_door(Global.CurrentLoc, new_loc)
+      if door and (Global.Doors[door] == null or Global.Keys.has(Global.Doors[door])):
+        Global.CanMove[dir] = true
 
 func enter_room(loc):
   if CurrentRoom != null:
+    CurrentRoom.deactivate()
     remove_child(CurrentRoom)  
   CurrentRoom = Global.Map[loc]
   assert(CurrentRoom != null, "out of bounds at: %s" % loc)
   add_child(CurrentRoom)
+  CurrentRoom.activate()
+  LastLoc = Global.CurrentLoc
   Global.CurrentLoc = loc
   Global.SeenRooms[loc] = true
+  update_can_move()
+  print(Global.CanMove)
+  $CanvasLayer/GUI/Panel/HBoxContainer/RoomLabel.text = CurrentRoom.room_title
   CurrentRoom.enter()
 
 var input_to_dir = {
@@ -23,7 +54,6 @@ var input_to_dir = {
 }
 
 func _unhandled_input(event):
-  queue_redraw()
   if event.is_action_pressed("investigate"):
     CurrentRoom.investigate()
   else:
@@ -35,8 +65,20 @@ func _unhandled_input(event):
         if door and (Global.Doors[door] == null or Global.Keys.has(Global.Doors[door])):
           enter_room(new_loc)
 
-
 func _on_start_button_pressed():
   enter_room(Global.Start)
   $CanvasLayer/MainMenu.hide()
+  $CanvasLayer/GUI.show()
+  update_health()
   queue_redraw()  
+
+func toggle_map(on):
+  $CanvasLayer/Map.visible = true
+  print($CanvasLayer/Map.modulate.a)
+  if on and $CanvasLayer/Map.modulate.a == 0:
+    $CanvasLayer/AnimationPlayer.play("fadein")
+  elif !on and $CanvasLayer/Map.modulate.a == 1:
+    $CanvasLayer/AnimationPlayer.play_backwards("fadein")
+
+func update_health():
+  $CanvasLayer/GUI/Panel/HBoxContainer/HealthLabel.text = "%s HP" % Global.PlayerStats.Health

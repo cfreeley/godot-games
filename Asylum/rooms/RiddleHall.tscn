@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://gqhlho3gig0v"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_6ge2l"]
+[ext_resource type="Resource" uid="uid://pui3344viyrx" path="res://rooms/RiddleHall.dialogue" id="2_3d0u2"]
+
+[node name="RiddleHall" instance=ExtResource("1_6ge2l")]
+room_title = "EastCorridor"
+room_diag = ExtResource("2_3d0u2")

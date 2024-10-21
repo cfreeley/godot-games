@@ -1,7 +1,13 @@
 ~ intro
-You are alone in your cell.
+You are alone in your cell. You hear a scratching sound coming from behind the door.
 => END!
 
 ~ investigate
-Your cell room is empty except for the cold concrete walls and the rusty frame of your bed. You hear a scratching sound coming from behind your cell door.
+Your cell room is mostly empty except for the cold concrete walls and the rusty frame of your bed.
+if Keys.has("rusty"):
+	=> END!
+Then you notice a note that has been slipped under your door.
+"A present for you, if you want it. [wait=.25][speed=0.2]xoxo"
+Taped to the underside of the note is a rusty key. It seems to fit into your cell door.
+do gain_key.emit("rusty")
 => END!

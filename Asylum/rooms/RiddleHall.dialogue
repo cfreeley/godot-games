@@ -1,0 +1,42 @@
+~ intro
+You are in the eastern corridor. You can hear some muffled sobs from the nearby cell.
+=> END!
+
+~ investigate
+if Keys.has("riddle"):
+	The cell next door is now unlocked.
+	=> END!
+The cell next to you appears to be locked. Suddenly you hear a woman's voice from inside of it.
+???: Would you tell me what it's like outside?
+- "Okay."
+	=> riddle
+- Don't answer.
+=> END!
+
+~ riddle
+set riddle1 = false
+set riddle2 = false
+set riddle3 = false
+???: What color is the sun?
+- Yellow
+- Blue
+- Orange
+	set riddle1 = true
+???: What color is the grass?
+- Green
+- Silver
+- Black
+	set riddle2 = true
+???: What color is the sky?
+- Blue
+- Purple
+	set riddle3 = true
+- White
+if riddle1 and riddle2 and riddle3:
+	???: Yes! Yes. Yes. Yes.
+	You hear the sound of the door unlocking.
+	do gain_key.emit("riddle")
+else:
+	???: NO![wait=.25] No![wait=.25][speed=2.0] NO! No. No. NO. No. No.
+	It might be best to come back later.
+=> END!

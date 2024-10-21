@@ -23,16 +23,22 @@ Global="*res://Global.gd"
 
 [dialogue_manager]
 
+general/states=["Global"]
 general/balloon_path="res:///balloon.tscn"
 
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=720
+window/size/resizable=false
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[gui]
+
+theme/custom_font="res://SilentHunterIII Font.ttf"
 
 [input]
 
@@ -66,7 +72,7 @@ interact={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://rooms/PlayerCell.dialogue", "res://rooms/EntranceWay.dialogue", "res://rooms/EmptyHall.dialogue", "res://encounters/Skinless.dialogue", "res://encounters/Player.dialogue")
+locale/translations_pot_files=PackedStringArray("res://rooms/PlayerCell.dialogue", "res://rooms/EntranceWay.dialogue", "res://rooms/EmptyHall.dialogue", "res://encounters/Skinless.dialogue", "res://encounters/Player.dialogue", "res://rooms/RiddleHall.dialogue")
 
 [rendering]
 

@@ -58,41 +58,41 @@ var conditions: Dictionary = {}
 
 
 func _init(data: Dictionary = {}) -> void:
-	if data.size() > 0:
-		id = data.id
-		next_id = data.next_id
-		type = data.type
-		extra_game_states = data.get("extra_game_states", [])
+  if data.size() > 0:
+    id = data.id
+    next_id = data.next_id
+    type = data.type
+    extra_game_states = data.get("extra_game_states", [])
 
-		match type:
-			_DialogueConstants.TYPE_DIALOGUE:
-				character = data.character
-				character_replacements = data.get("character_replacements", [] as Array[Dictionary])
-				text = data.text
-				text_replacements = data.get("text_replacements", [] as Array[Dictionary])
-				translation_key = data.get("translation_key", data.text)
-				pauses = data.get("pauses", {})
-				speeds = data.get("speeds", {})
-				inline_mutations = data.get("inline_mutations", [] as Array[Array])
-				time = data.get("time", "")
-				tags = data.get("tags", [])
+    match type:
+      _DialogueConstants.TYPE_DIALOGUE:
+        character = data.character
+        character_replacements = data.get("character_replacements", [] as Array[Dictionary])
+        text = data.text
+        text_replacements = data.get("text_replacements", [] as Array[Dictionary])
+        translation_key = data.get("translation_key", data.text)
+        pauses = data.get("pauses", {})
+        speeds = data.get("speeds", {})
+        inline_mutations = data.get("inline_mutations", [] as Array[Array])
+        time = data.get("time", "")
+        tags = data.get("tags", [])
 
-			_DialogueConstants.TYPE_MUTATION:
-				mutation = data.mutation
+      _DialogueConstants.TYPE_MUTATION:
+        mutation = data.mutation
 
 
 func _to_string() -> String:
-	match type:
-		_DialogueConstants.TYPE_DIALOGUE:
-			return "<DialogueLine character=\"%s\" text=\"%s\">" % [character, text]
-		_DialogueConstants.TYPE_MUTATION:
-			return "<DialogueLine mutation>"
-	return ""
+  match type:
+    _DialogueConstants.TYPE_DIALOGUE:
+      return "<DialogueLine character=\"%s\" text=\"%s\">" % [character, text]
+    _DialogueConstants.TYPE_MUTATION:
+      return "<DialogueLine mutation>"
+  return ""
 
 
 func get_tag_value(tag_name: String) -> String:
-	var wrapped := "%s=" % tag_name
-	for t in tags:
-		if t.begins_with(wrapped):
-			return t.replace(wrapped, "").strip_edges()
-	return ""
+  var wrapped := "%s=" % tag_name
+  for t in tags:
+    if t.begins_with(wrapped):
+      return t.replace(wrapped, "").strip_edges()
+  return ""

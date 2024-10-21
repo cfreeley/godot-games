@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://by6o11p56lb6l"]
+
+[ext_resource type="FontFile" uid="uid://cpdk1brm13nqd" path="res://SilentHunterIII Font.ttf" id="1_hp0km"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtug6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfjys"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(0, 0, 0.72549, 1)
+
+[resource]
+default_font = ExtResource("1_hp0km")
+Button/styles/normal = SubResource("StyleBoxFlat_vtug6")
+Panel/styles/panel = SubResource("StyleBoxFlat_yfjys")
