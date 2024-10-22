@@ -23,32 +23,57 @@ signal retreat()
 signal update_health()
 @warning_ignore("unused_signal")
 signal open_inventory()
+@warning_ignore("unused_signal")
+signal drink_fountain()
+@warning_ignore("unused_signal")
+signal toggle_switch(value)
+@warning_ignore("unused_signal")
+signal stat_boost(stat)
+@warning_ignore("unused_signal")
+signal get_pistol()
+@warning_ignore("unused_signal")
+signal get_pistol_ammo(amount)
+@warning_ignore("unused_signal")
+signal weapon_change(source)
+@warning_ignore("unused_signal")
+signal game_end(source)
 
 var PlayerStats := {
   'Might': 2,
   'Agility': 1,
   'Arcana': 0,
-  'Health': 6
+  'Health': 6,
+  'Corruption': 0,
 }
 
 var Weapons := {
   "Fist": {
     "damage": 1,
+    "type": "melee",
     "owned": true
   },
   "Knife": {
     "damage": 2,
+    "type": "melee",
   },
-  "Lead Pipe": {
+  "Pipe": {
     "damage": 3,
+    "type": "melee",
   },
   "Pistol": {
     "damage": 2,
+    "type": "ranged",
+    "ammo": 0
   },
   "Shotgun": {
     "damage": 4,
+    "type": "ranged",
+    "ammo": 0
   }
 }
+
+func get_ammo():
+  return Weapons[CurrentWeapon].get("ammo")
 
 var CurrentAction
 var CurrentLoc : Vector2
@@ -62,6 +87,7 @@ var my_total : int
 var enemy_roll : int
 var enemy_total : int
 var roll_delta : int
+var roll_outcome : String
 
 var LEFT = Vector2(-1, 0)
 var RIGHT = Vector2(1, 0)
@@ -84,21 +110,20 @@ var Map := {
   SW_Corner: preload("res://rooms/EmptyHall.tscn").instantiate(),
   (SW_Corner + DOWN): preload("res://rooms/RadioCell.tscn").instantiate(),
   (SW_Corner + LEFT): preload("res://rooms/AnarchistRoom.tscn").instantiate(),
-  Center: preload("res://rooms/EmptyHall.tscn").instantiate(),
+  Center: preload("res://rooms/BasementStairway.tscn").instantiate(),
   (Center + LEFT): preload("res://rooms/ScratchedJunction.tscn").instantiate(),
   (Center + RIGHT): preload("res://rooms/RiddleHall.tscn").instantiate(),
   (Center + RIGHT + RIGHT): preload("res://rooms/PaddedRoom.tscn").instantiate(),
-  Back: preload("res://rooms/EmptyHall.tscn").instantiate(),
+  Back: preload("res://rooms/DamagedHall.tscn").instantiate(),
   (Back + UP): preload("res://rooms/Office.tscn").instantiate(),
-  NE_Corner: preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (NE_Corner + UP): preload("res://rooms/EmptyHall.tscn").instantiate(),
-  NW_Corner: preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (NW_Corner + UP): preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (NW_Corner + UP + LEFT): preload("res://rooms/EmptyHall.tscn").instantiate(),
+  NE_Corner: preload("res://rooms/NortheastCorner.tscn").instantiate(),
+  (NE_Corner + UP): preload("res://rooms/ControlRoom.tscn").instantiate(),
+  NW_Corner: preload("res://rooms/NorthwestCorner.tscn").instantiate(),
+  (NW_Corner + UP): preload("res://rooms/ObservationRoom.tscn").instantiate(),
+  (NW_Corner + UP + LEFT): preload("res://rooms/SecureContainment.tscn").instantiate(),
 }
 
-var Keys := {
-}
+var Keys := {}
 var riddle1 = false
 var riddle2 = false
 var riddle3 = false
@@ -120,8 +145,8 @@ var Doors := {
   [NE_Corner, Back]: null,
   [NE_Corner, NE_Corner + UP]: null,
   [NW_Corner, Back]: null,
-  [NW_Corner, NW_Corner + UP]: "Security Override B",
-  [NW_Corner + UP, NW_Corner + UP + LEFT]: null,
+  [NW_Corner, NW_Corner + UP]: "Observation Lock Release",
+  [NW_Corner + UP, NW_Corner + UP + LEFT]: "Containment Lock Release",
 }
 
 func get_door(l1, l2):
@@ -131,8 +156,19 @@ func get_door(l1, l2):
     return [l2, l1]
   return false;
 
+func door_unlocked(door):
+  var key = Doors[door]
+  var hidden_key = "%s$HIDE" % key
+  return Keys.has(key) or Keys.has(hidden_key)
+
 var SeenRooms := {}
 var CanMove := {}
 var HasIncantation := false
 var HasHeardRadio := false
 var HasMolotov = null
+var RemainingTears := 3
+var HasBoost := false
+var HasLootedPistolAmmo = false
+
+var GuardStatus = "locked" # "escaped" | "dead" | "locked"
+var DoorStatus # "containment" | "observation" | "both"

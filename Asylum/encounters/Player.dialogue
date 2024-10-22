@@ -20,18 +20,30 @@ What shall you do?
 ~ combat
 What shall you do?
 - Attack
-	You attack with your {{CurrentWeapon}}.
-	set CurrentAction = "attack"
+	if Weapons[CurrentWeapon].type == 'ranged':
+		if get_ammo() > 0:
+			set CurrentAction = "shoot"
+		else:
+			Your gun is out of ammo.
+			=> combat	
+	else:
+		You attack with your {{CurrentWeapon}}.
+		set CurrentAction = "attack"
 - Evade
 	You attempt to slip by.
 	set CurrentAction = "evade"
 - Retreat
 	You duck back the way you came.
 	set CurrentAction = "retreat"
+- Recite Incantation [if HasIncantation]
+	set CurrentAction = "spell"
+- Throw Molotov [if HasMolotov == true]
+	set CurrentAction = "grenade"
 => END!
 
 ~ attack
 You rolled a {{my_total}} ({{ my_roll }} + {{ PlayerStats.Might }}). The enemy rolled a {{ enemy_total }}.
+	{{ roll_outcome }}
 if roll_delta < 0:
 	The {{EncounterName}} overpowers you completely. You didn't even manage to hurt it.
 elif roll_delta < 3:
@@ -42,6 +54,7 @@ else:
 
 ~ evade
 You rolled a {{my_total}} ({{ my_roll }} + {{ PlayerStats.Agility }}). The enemy rolled a {{ enemy_total }}.
+	{{ roll_outcome }}
 if roll_delta < 0:
 	The {{EncounterName}} pounces on you before you can attempt escape.
 elif roll_delta < 3:
@@ -50,20 +63,53 @@ else:
 	You slip out unseen.
 => END!
 
+~ grenade
+You hastily light and toss the Molotov at the {{EncounterName}}. It immediately bursts into flames.
+=> END!
+
+~ shoot
+You shoot at the enemy from a safe distance and land a direct hit.
+=> END!
+
+~ spell
+You rolled a {{my_total}} ({{ my_roll }} + {{ PlayerStats.Arcana }}). You also rolled a {{ enemy_total }}.
+	{{ roll_outcome }}
+if roll_delta < 0:
+	The {{EncounterName}} freezes momentarily as you chant, but then your resolve fades and you stop. You get distracted with the beautiful red mist that has formed around you. You drink it in hungrily.
+	=> corruption
+elif roll_delta < 3:
+	You lose yourself in the words you chant. A red haze begins to surround you, and while the {{EncounterName}} seems to recoil at its touch, you welcome it inside you.
+	=> corruption
+else:
+	As you recite the dark words the {{EncounterName}} falls to its knees and squeals in pain. A dark thought begins to bubble up in the back of your mind, but you dismiss it with ease.
+=> END!
+
+~ corruption
+if PlayerStats.Corruption == 1:
+	You feel as if something has taken root inside of you. A quickly fading voice inside you begs you to forget those words.
+elif PlayerStats.Corruption == 2:
+	The darkness inside you spreads, infecting every cell in your body. You fear that if you meddle with this power again, you will change irrevocably.
+elif PlayerStats.Corruption == 3:
+	The world seems to take on a lovely red hue. You are so close to joining your friend. Just say the words again and accept their invitation.
+	do RenderingServer.set_default_clear_color(Color.DARK_RED)
+elif PlayerStats.Corruption == 4:
+	do Global.game_end.emit("corruption")
+=> END!
+
 # Encounters
 
 ~ skinless
-A grinning man with no skin lunges at you.
+A grinning man with no skin lunges at you with a rusty knife.
 => combat
 
 ~ wretched
-A horrific woman covered in black tendrils looks you in the eye and begins to screech.
+A horrific woman covered in black tendrils looks you in the eye and begins to screech. [wait=.2]She is emanating a wretched aura.
 => combat
 
 ~ brute
-A large man with a swolen body grins at you with malice.
+A large man with a swolen body grins at you with malice. [wait=.2]He's holding a heavy lead pipe that could probably break your ribs with a single swing.
 => combat
 
 ~ eyeless
-A creature with no eyes paces around, listening intently.
+A creature with no eyes paces around, listening intently. [wait=.2]It has long, sharp clawlike fingernails.
 => combat

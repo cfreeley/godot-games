@@ -1,10 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlnc1igdeb5id"]
+[gd_scene load_steps=3 format=3 uid="uid://dlnc1igdeb5id"]
 
 [ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_a07w8"]
 [ext_resource type="Resource" uid="uid://bqqcg4tfgq8ft" path="res://rooms/PlayerCell.dialogue" id="2_3ogql"]
-[ext_resource type="Script" path="res://rooms/PlayerCell.gd" id="2_57xii"]
 
 [node name="PlayerCell" instance=ExtResource("1_a07w8")]
-script = ExtResource("2_57xii")
-room_title = "My Cell"
+room_title = "Your Cell"
 room_diag = ExtResource("2_3ogql")

@@ -7,7 +7,7 @@ Your cell room is mostly empty except for the cold concrete walls and the rusty 
 if Keys.has("Rusty Key"):
 	=> END!
 Then you notice a note that has been slipped under your door.
-"A present for you, if you want it. [wait=.25][speed=0.2]xoxo"
+"A present for you, if you want it. [wait=.25][speed=0.2]-A friend"
 Taped to the underside of the note is a rusty key. It seems to fit into your cell door.
 do gain_key.emit("Rusty Key")
 => END!

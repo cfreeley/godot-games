@@ -4,26 +4,26 @@ You enter an empty cell. There is a table with a few belongings arranged neatly.
 
 ~ investigate
 if HasHeardRadio:
-	The guard is no longer talking on the walkie, but it would be hard to forget his words. Toggle the "Observation" switch in the northeast security room, and don't toggle the "Containment" switch.
+	The guard is no longer talking on the walkie, but it would be hard to forget his words. Toggle the "Observation" switch in the northeast security room, and do not touch the other one.
 	=> END!
-You see a walkie-talkie on the desk. You put it up to your ears and hear a voice.
-???: Attention, attention. This is Corporal Fange, does anyone copy?
-- "Hello."
+You see a walkie-talkie on the desk. You put it up to your ear and hear a gruff voice.
+???: Mayday! Mayday! This is Officer Herman Potts, does anyone copy?
+- "Hello?"
 	=> radio
 - Don't respond
 => END!
 
 ~ radio
-Fange: About goddamn time! I need assistance. I'm holed up in the Observation Room. It's at the end of the west corridor. Once all the shit hit the fan the electric security doors locked, and now I can't get out.
-Fange: I need you go to the security room in the Northeast junction and unlock it. There should be a control panel there, you just have to toggle the switch. Even one of you numb nuts couldn't fuck it up.
-Fange: The thing is... and I want to be really goddamn clear about this... you cannot toggle the switch marked "Containment". Only the switch marked "Observation". You got that?
+Potts: About time! Officer in need of assistance. I've been hiding out in the Observation Room at the end of the west corridor. I ran over here when the loonies got loose, but then those damn security doors locked me in. Now I can't get out! 
+Potts: Listen up! Go to the security room in the Northeast corner and unlock it. There should be a control panel there, you just have to flip the switch. Then I can shoot my way outta here, got my Pistol at the ready. 
+Potts: Uh, [wait=.4]I mean WE can shoot our way outta here. I mean, you’re not one of those loonies are you?
+- "..No"
+- "Yes"
+- Say nothing.
+Potts: Huh. [wait=.2]Well, listen. Flip that “Observation” switch and uh…[wait=.2] I’ll be sure to help you get outta here too.
+Potts: Just don’t hit the other switch, the one marked "Containment". Don’t even worry your pretty head about that one. 
+Potts: We can help each other out here right, loony?
 - "Yes."
 - Don't respond
-Fange: I'm gonna need an affirmative fucking answer from you pal. Toggle the "Observation" switch AND NOT the "Containment" switch. Can you repeat that back to me?
-- "Toggle the Observation switch"
-	Fange: [speed=0.2]Gooood. [speed=1.0]There you go pal. Even you can't fuck up something that simple, huh? Now hurry, I'm getting cramped in here.
-- "Toggle the Containment switch"
-	Fange: Fuck. Dumb Shit. Forget it, I'll find someone else to help.
-- Don't respond
-	Fange: Hello? [wait=.5]Fuck. Dumbass.
+Potts: Well alright then.
 set HasHeardRadio = true

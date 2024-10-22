@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://c3i2082v1a6vo"
+path="res://.godot/imported/NortheastCorner.dialogue-b2de737e31034f0cbbe5139b506c3ed3.tres"
+
+[deps]
+
+source_file="res://rooms/NortheastCorner.dialogue"
+dest_files=["res://.godot/imported/NortheastCorner.dialogue-b2de737e31034f0cbbe5139b506c3ed3.tres"]
+
+[params]
+
+defaults=true

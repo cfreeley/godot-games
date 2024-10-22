@@ -5,6 +5,7 @@ An empty cell filled with bottles of strange liquids. The walls are covered in s
 ~ investigate
 if HasMolotov != null:
 	All you see is strange bottles of unknown liquids. Nothing you trust or would know what to do with.
-Among the unrecognizable bottles, you find what a familiar shape- a Molotov cocktail.
+	=> END!
+Among the unrecognizable bottles, you spot familiar shape- a Molotov cocktail.
 set HasMolotov = true
 => END!

@@ -1,13 +1,15 @@
 ~ intro
-You enter a cell with a makeshift altar to Saint Irulan. You feel calm in her presence.
+You enter a cell with a makeshift altar to Saint Kalina. You feel calm in her presence.
 => END!
 
 ~ investigate
-Saint Irulan the Grotesque is the patron saint of the inmates here. Her statue is leaking greenish water from her eyes.
-Drink the water?
+if RemainingTears <= 0:
+	The statue is all dried up.
+	=> END
+Saint Kalina the Grotesque is the patron saint of the inmates here. Her statue is leaking greenish water from her eyes.
+Drink the water? ({{RemainingTears}} uses left.)
 - Yes
 	You feel rejuvenated.
-	set PlayerStats.Health = 7
-	do Global.update_health.emit()
+	do Global.drink_fountain.emit()
 - No
 => END!

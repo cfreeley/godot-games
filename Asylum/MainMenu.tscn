@@ -26,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_stretch_ratio = 6.55
 theme = ExtResource("2_3k3xe")
+shortcut_in_tooltip = false
 text = "Start"
 
 [node name="Label" type="RichTextLabel" parent="."]

@@ -1,12 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlxasxhna6u47"]
+[gd_scene load_steps=12 format=3 uid="uid://dlxasxhna6u47"]
 
 [ext_resource type="Script" path="res://Dungeon.gd" id="1_4o8wi"]
 [ext_resource type="PackedScene" uid="uid://ctw8oukva4il8" path="res://MainMenu.tscn" id="2_k3a3m"]
 [ext_resource type="Script" path="res://Map.gd" id="3_8cieb"]
 [ext_resource type="Theme" uid="uid://by6o11p56lb6l" path="res://game_theme.tres" id="3_uw23p"]
 [ext_resource type="PackedScene" uid="uid://hpcbyqqorcjj" path="res://Inventory.tscn" id="5_0pboq"]
-[ext_resource type="PackedScene" uid="uid://drwugmpukxcrf" path="res://encounters/Encounter.tscn" id="6_ojxj5"]
-[ext_resource type="Texture2D" uid="uid://0krtqqmyhimq" path="res://img/tendril.png" id="7_kp0rp"]
 
 [sub_resource type="Animation" id="Animation_0mek1"]
 length = 0.001
@@ -136,15 +134,7 @@ layout_mode = 2
 theme = SubResource("Theme_u7alg")
 text = "Inventory"
 
-[node name="SecretEncounter" parent="CanvasLayer" instance=ExtResource("6_ojxj5")]
-visible = false
-script = null
-
-[node name="Sprite2D" parent="CanvasLayer/SecretEncounter" index="0"]
-texture = ExtResource("7_kp0rp")
-
 [connection signal="pressed" from="CanvasLayer/MainMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/Panel/HBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
 
 [editable path="CanvasLayer/MainMenu"]
-[editable path="CanvasLayer/SecretEncounter"]

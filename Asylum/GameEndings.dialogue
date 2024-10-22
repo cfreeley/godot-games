@@ -1,0 +1,22 @@
+~ death
+The latest blow knocks you to the ground. As the life leaves your body, you can't stop thinking bitterly of how close you came to escape. You are dead.
+=> gameover
+
+~ corruption
+You feel euphoria as black tendrils erupt from your skin in blissful agony. A glorious shade of scarlet consumes your vision. Your friend appears and extends a hand. You take it!
+=> gameover
+
+~ arrest
+You reach the top of the stairs and enter the main floor of the Asylum. You walk by the bodies of dead doctors, orderlies, and inmates as you make your way to the main entrance.
+You open the door and step outside, only to feel cold steel on the back of your head.
+Potts: I didn't think you'd be able to make it, loony. You don't seem as far gone as the others. Still, better safe than sorry.
+=> gameover
+
+~ fire
+You reach the top of the stairs expecting to return to the ground floor of the Asylum, but are instead led outside. There are no buildings or trees, only scorched black grass. A deep red haze blocks out the sun and sky.
+=> gameover
+
+~ gameover
+Game Over
+do get_tree().quit()
+=> END!

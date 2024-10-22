@@ -1,0 +1,12 @@
+~ intro
+if GuardStatus == 'escaped':
+	The grated door seems to have been left open.
+else:
+	You unlock the grated door and pull it open.
+You step through and climb up the stairs.
+do Global.game_end.emit('stairs')
+=> END!
+
+~ investigate
+...
+=> END!

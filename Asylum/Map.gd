@@ -31,7 +31,7 @@ func _draw():
       door_pos = base_pos + Vector2(w + (buffer/2), h/2)
     var col = Color.BLUE
     if Global.Doors[door] != null and (Global.SeenRooms.has(door[0]) or Global.SeenRooms.has(door[1])):
-      col = Color.RED if !Global.Keys.has(Global.Doors[door]) else Color.WEB_GREEN
+      col = Color.RED if !Global.door_unlocked(door) else Color.GREEN
     draw_rect(Rect2(door_pos, Vector2(door_size, door_size)), col, true)
   for loc in Global.Map.keys():
     var coord = Vector2(loc.x, loc.y)

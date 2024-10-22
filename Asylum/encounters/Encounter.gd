@@ -19,6 +19,7 @@ func _ready():
   $Sprite2D.texture = texture
   DialogueManager.dialogue_ended.connect(_diag_end)
   DialogueManager.got_dialogue.connect(_diag_received)
+  Global.open_inventory.connect(on_inventory)
 
 func start():
   Global.toggle_map.emit(false)
@@ -27,6 +28,9 @@ func start():
   en_hostile = true
   $AnimationPlayer.play("fadein")
   balloon = DialogueManager.show_dialogue_balloon(player_diag, en_name )
+  
+func on_inventory(vis):
+  visible = !vis
 
 func _diag_end(diagResource):
   if !is_active:
@@ -39,10 +43,16 @@ func _diag_end(diagResource):
         evade()
       "retreat":
         retreat()
+      "shoot":
+        shoot()
+      "grenade":
+        grenade()
+      "spell":
+        spell()
     Global.CurrentAction = null
   elif Global.CurrentAction == null:
     if Global.PlayerStats.Health <= 0:
-      print("Game over")
+      Global.game_end.emit("death")
     elif Global.EncounterHp <= 0:
       $AnimationPlayer.play_backwards("fadein")
     elif !balloon && en_hostile: # witchcraft :(
@@ -53,6 +63,15 @@ func _diag_end(diagResource):
 
 func roll():
   return randi_range(1,6)
+
+func update_roll_outcome():
+  var roll_label = "+%s" % Global.roll_delta if Global.roll_delta > 0 else str(Global.roll_delta) 
+  if Global.roll_delta >= 3:
+    Global.roll_outcome = "%s: total success." % roll_label
+  elif Global.roll_delta >= 0:
+    Global.roll_outcome = "%s: mixed success." % roll_label
+  else:
+    Global.roll_outcome = "%s: failure." % roll_label
 
 func attack():
   Global.my_roll = roll();
@@ -65,7 +84,31 @@ func attack():
     Global.update_health.emit()
   if Global.roll_delta >= 0:
     Global.EncounterHp -= Global.WeaponDamage
+  update_roll_outcome()
   DialogueManager.show_dialogue_balloon(player_diag, "attack")
+
+func shoot():
+  Global.Weapons[Global.CurrentWeapon].ammo -= 1
+  Global.EncounterHp -= Global.WeaponDamage
+  DialogueManager.show_dialogue_balloon(player_diag, "shoot")
+
+func grenade():
+  Global.HasMolotov = false
+  Global.EncounterHp -= 6
+  DialogueManager.show_dialogue_balloon(player_diag, "grenade")
+
+func spell():
+  Global.my_roll = roll();
+  Global.my_total = Global.my_roll + Global.PlayerStats.Arcana
+  Global.enemy_roll = roll();
+  Global.enemy_total = Global.enemy_roll - Global.PlayerStats.Arcana;
+  Global.roll_delta = Global.my_total - Global.enemy_total
+  if Global.roll_delta < 3:
+    Global.PlayerStats.Corruption += 1
+  if Global.roll_delta >= 0:
+    Global.EncounterHp -= 5
+  update_roll_outcome()
+  DialogueManager.show_dialogue_balloon(player_diag, "spell")
 
 func evade():
   Global.my_roll = roll();
@@ -78,6 +121,7 @@ func evade():
     Global.update_health.emit()
   if Global.roll_delta >= 0:
     en_hostile = false
+  update_roll_outcome()
   DialogueManager.show_dialogue_balloon(player_diag, "evade")
 
 func retreat():
