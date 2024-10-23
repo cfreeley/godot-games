@@ -3,10 +3,8 @@ extends Node2D
 var CurrentRoom : Node2D
 var LastLoc : Vector2
 var endings = preload("res://GameEndings.dialogue")
-var clean_savefile : PackedByteArray
 
 func _ready():
-  clean_savefile = Global.serialize()
   Global.init_map(Global.BasementTemplate)
   $CanvasLayer/MainMenu.show()
   Global.room_move.connect(move_by)
@@ -23,6 +21,9 @@ func _ready():
   Global.weapon_change.connect(update_weapon)
   Global.game_end.connect(game_end)
   Global.reset.connect(reset)
+  if Global.skip_to_start:
+    _on_start_button_pressed()
+  Global.skip_to_start = true
 
 func game_end(source):
   CurrentRoom.deactivate()
@@ -34,10 +35,13 @@ func game_end(source):
   if end == "fire" or end == "corruption":
     $CanvasLayer/SecretEncounter.get_node("AnimationPlayer").play("fadein")
     $CanvasLayer/SecretEncounter.visible = true
+  Global.Ending = end
+  Global.EndingNum = ["death", "corruption", "arrest", "fire"].find(end)
   DialogueManager.show_dialogue_balloon(endings, end)
 
-func reset():
-  Global.load(clean_savefile)
+func reset(from_save):
+  var save = Global.QuickSave if from_save and Global.QuickSave != null else Global.CleanSave
+  Global.load(save)
 
 func get_key(key):
   Global.Keys[key] = true
@@ -114,20 +118,8 @@ var input_to_dir = {
   "ui_right": Global.RIGHT,
 }
 
-#func _unhandled_input(event):
-  #if event.is_action_pressed("investigate"):
-    #CurrentRoom.investigate()
-  #else:
-    #for action in input_to_dir.keys():
-      #if event.is_action_pressed(action):
-        #var dir = input_to_dir[action]
-        #var new_loc = Global.CurrentLoc + dir
-        #var door = Global.get_door(Global.CurrentLoc, new_loc)
-        #if door and (Global.Doors[door] == null or Global.Keys.has(Global.Doors[door])):
-          #enter_room(new_loc)
-
 func _on_start_button_pressed():
-  enter_room(Global.Start)
+  enter_room(Global.CurrentLoc)
   $CanvasLayer/MainMenu.hide()
   $CanvasLayer/GUI.show()
   update_health()
@@ -151,3 +143,8 @@ func _on_inventory_button_pressed():
   $CanvasLayer/Menu.visible = visible
   $CanvasLayer/Map.visible = !visible
   Global.open_inventory.emit(visible)
+
+
+func _on_save_button_pressed():
+  Global.QuickSave = Global.serialize()
+  Global.SaveCount += 1

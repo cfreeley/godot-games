@@ -136,6 +136,11 @@ layout_mode = 2
 theme = SubResource("Theme_u7alg")
 text = "Inventory"
 
+[node name="SaveButton" type="Button" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u7alg")
+text = "Save"
+
 [node name="SecretEncounter" parent="CanvasLayer" instance=ExtResource("6_ojxj5")]
 visible = false
 script = null
@@ -145,6 +150,7 @@ texture = ExtResource("7_kp0rp")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/Panel/HBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/Panel/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 
 [editable path="CanvasLayer/MainMenu"]
 [editable path="CanvasLayer/SecretEncounter"]

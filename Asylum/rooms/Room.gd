@@ -44,6 +44,7 @@ func end_encounter():
   assert(encounter != null)
   encounter.queue_free()
   encounter = null
+  Global.EnemiesKilled += 1
   enter()
 
 func activate():

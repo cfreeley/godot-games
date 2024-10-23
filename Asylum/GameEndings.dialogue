@@ -18,5 +18,17 @@ You reach the top of the stairs expecting to return to the ground floor of the A
 
 ~ gameover
 Game Over
-do Global.reset.emit()
+- Reload
+	do Global.reset.emit(true)
+- Quit
+	do Global.reset.emit(false)
+- Stats
+	=> stats
 => END!
+
+~ stats
+Enemies Killed\: {{ EnemiesKilled }}
+Saves\: {{ SaveCount }}
+Ending\: {{ Ending }} ({{ EndingNum }} of 4)
+=> gameover
+ 

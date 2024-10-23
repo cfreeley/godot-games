@@ -38,9 +38,14 @@ signal weapon_change(source)
 @warning_ignore("unused_signal")
 signal game_end(source)
 @warning_ignore("unused_signal")
-signal reset()
+signal reset(from_save)
 @warning_ignore("unused_signal")
 signal load_game(file)
+
+var CleanSave
+var QuickSave
+func _ready():
+  CleanSave = serialize()
 
 var PlayerStats := {
   'Might': 2,
@@ -79,13 +84,6 @@ var Weapons := {
 func get_ammo():
   return Weapons[CurrentWeapon].get("ammo")
 
-var CurrentAction
-var CurrentLoc : Vector2
-var CurrentWeapon := "Fist"
-var WeaponDamage := 1
-var EncounterName
-var EncounterHp : int
-
 var my_roll : int
 var my_total : int
 var enemy_roll : int
@@ -107,6 +105,13 @@ var Back = Center + UP
 var NW_Corner = Back + LEFT
 var NE_Corner = Back + RIGHT
 
+var CurrentAction
+var CurrentLoc = Start
+var CurrentWeapon := "Fist"
+var WeaponDamage := 1
+var EncounterName
+var EncounterHp : int
+
 var BasementTemplate := {
   Start: ("res://rooms/PlayerCell.tscn"),
   Entrance: ("res://rooms/EntranceWay.tscn"),
@@ -127,11 +132,23 @@ var BasementTemplate := {
   (NW_Corner + UP): ("res://rooms/ObservationRoom.tscn"),
   (NW_Corner + UP + LEFT): ("res://rooms/SecureContainment.tscn"),
 }
+
+var Map := {}
+var MapMemory := {}
+
 func init_map(template : Dictionary):
   Map = {}
   for key in template.keys():
     Map[key] = load(template[key]).instantiate()
-var Map := {}
+    if Map[key].get("encounter") and MapMemory.has(key):
+      if MapMemory.get(key) == null:
+        Map[key].encounter.queue_free()
+        Map[key].encounter = null
+      else:
+        Map[key].encounter.en_hp = MapMemory[key].en_hp
+  for x in Map.keys():
+    print(Map[x].encounter)
+
 
 var Keys := {}
 var riddle1 = false
@@ -179,26 +196,33 @@ var HasMolotov = null
 var RemainingTears := 3
 var HasBoost := false
 var HasLootedPistolAmmo = false
-
+var SaveCount = 0
+var EnemiesKilled = 0
+var Ending : String
+var EndingNum : int
+var skip_to_start = false
 var GuardStatus = "locked" # "escaped" | "dead" | "locked"
 var DoorStatus # "containment" | "observation" | "both"
 
-
+var banned := ["Global.gd", "CleanSave", "QuickSave"]
 func serialize():
   var empty = Node.new()
   var data = {}
   for prop in Global.get_property_list():
     var pname = prop.name
-    if pname == "Global.gd" or empty.get_property_list().any(func(p): return p.name == pname):
+    if banned.has(pname) or empty.get_property_list().any(func(p): return p.name == pname):
       continue
     data[pname] = Global[pname]
+
   data.Map = {}
+  for key in Map:
+    data.MapMemory[key] = null if Map[key].get('encounter') == null else { "en_hp": Map[key].encounter.en_hp }
   return var_to_bytes(data)
   
 func load(serial):
   var data = bytes_to_var(serial)
   for key in data:
-    var value = data[key]  
+    var value = data[key]
     Global[key] = value
   get_tree().change_scene_to_file("res://Dungeon.tscn")
   
