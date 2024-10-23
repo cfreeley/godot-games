@@ -18,5 +18,5 @@ You reach the top of the stairs expecting to return to the ground floor of the A
 
 ~ gameover
 Game Over
-do get_tree().quit()
+do Global.reset.emit()
 => END!

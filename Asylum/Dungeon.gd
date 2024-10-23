@@ -3,9 +3,10 @@ extends Node2D
 var CurrentRoom : Node2D
 var LastLoc : Vector2
 var endings = preload("res://GameEndings.dialogue")
+var clean_savefile : PackedByteArray
 
 func _ready():
-  Global.serialize()
+  clean_savefile = Global.serialize()
   Global.init_map(Global.BasementTemplate)
   $CanvasLayer/MainMenu.show()
   Global.room_move.connect(move_by)
@@ -21,6 +22,7 @@ func _ready():
   Global.get_pistol_ammo.connect(get_pistol_ammo)
   Global.weapon_change.connect(update_weapon)
   Global.game_end.connect(game_end)
+  Global.reset.connect(reset)
 
 func game_end(source):
   CurrentRoom.deactivate()
@@ -33,6 +35,9 @@ func game_end(source):
     $CanvasLayer/SecretEncounter.get_node("AnimationPlayer").play("fadein")
     $CanvasLayer/SecretEncounter.visible = true
   DialogueManager.show_dialogue_balloon(endings, end)
+
+func reset():
+  Global.load(clean_savefile)
 
 func get_key(key):
   Global.Keys[key] = true

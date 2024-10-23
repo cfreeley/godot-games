@@ -38,6 +38,8 @@ signal weapon_change(source)
 @warning_ignore("unused_signal")
 signal game_end(source)
 @warning_ignore("unused_signal")
+signal reset()
+@warning_ignore("unused_signal")
 signal load_game(file)
 
 var PlayerStats := {
@@ -106,29 +108,29 @@ var NW_Corner = Back + LEFT
 var NE_Corner = Back + RIGHT
 
 var BasementTemplate := {
-  Start: preload("res://rooms/PlayerCell.tscn"),
-  Entrance: preload("res://rooms/EntranceWay.tscn"),
-  SE_Corner: preload("res://rooms/ScratchedJunction.tscn"),
-  (SE_Corner + DOWN): preload("res://rooms/Sanctum.tscn"),
-  SW_Corner: preload("res://rooms/EmptyHall.tscn"),
-  (SW_Corner + DOWN): preload("res://rooms/RadioCell.tscn"),
-  (SW_Corner + LEFT): preload("res://rooms/AnarchistRoom.tscn"),
-  Center: preload("res://rooms/BasementStairway.tscn"),
-  (Center + LEFT): preload("res://rooms/ScratchedJunction.tscn"),
-  (Center + RIGHT): preload("res://rooms/RiddleHall.tscn"),
-  (Center + RIGHT + RIGHT): preload("res://rooms/PaddedRoom.tscn"),
-  Back: preload("res://rooms/DamagedHall.tscn"),
-  (Back + UP): preload("res://rooms/Office.tscn"),
-  NE_Corner: preload("res://rooms/NortheastCorner.tscn"),
-  (NE_Corner + UP): preload("res://rooms/ControlRoom.tscn"),
-  NW_Corner: preload("res://rooms/NorthwestCorner.tscn"),
-  (NW_Corner + UP): preload("res://rooms/ObservationRoom.tscn"),
-  (NW_Corner + UP + LEFT): preload("res://rooms/SecureContainment.tscn"),
+  Start: ("res://rooms/PlayerCell.tscn"),
+  Entrance: ("res://rooms/EntranceWay.tscn"),
+  SE_Corner: ("res://rooms/ScratchedJunction.tscn"),
+  (SE_Corner + DOWN): ("res://rooms/Sanctum.tscn"),
+  SW_Corner: ("res://rooms/EmptyHall.tscn"),
+  (SW_Corner + DOWN): ("res://rooms/RadioCell.tscn"),
+  (SW_Corner + LEFT): ("res://rooms/AnarchistRoom.tscn"),
+  Center: ("res://rooms/BasementStairway.tscn"),
+  (Center + LEFT): ("res://rooms/ScratchedJunction.tscn"),
+  (Center + RIGHT): ("res://rooms/RiddleHall.tscn"),
+  (Center + RIGHT + RIGHT): ("res://rooms/PaddedRoom.tscn"),
+  Back: ("res://rooms/DamagedHall.tscn"),
+  (Back + UP): ("res://rooms/Office.tscn"),
+  NE_Corner: ("res://rooms/NortheastCorner.tscn"),
+  (NE_Corner + UP): ("res://rooms/ControlRoom.tscn"),
+  NW_Corner: ("res://rooms/NorthwestCorner.tscn"),
+  (NW_Corner + UP): ("res://rooms/ObservationRoom.tscn"),
+  (NW_Corner + UP + LEFT): ("res://rooms/SecureContainment.tscn"),
 }
 func init_map(template : Dictionary):
   Map = {}
   for key in template.keys():
-    Map[key] = template[key].instantiate()
+    Map[key] = load(template[key]).instantiate()
 var Map := {}
 
 var Keys := {}
@@ -185,11 +187,18 @@ var DoorStatus # "containment" | "observation" | "both"
 func serialize():
   var empty = Node.new()
   var data = {}
-
   for prop in Global.get_property_list():
     var pname = prop.name
     if pname == "Global.gd" or empty.get_property_list().any(func(p): return p.name == pname):
       continue
     data[pname] = Global[pname]
   data.Map = {}
-  return JSON.stringify(data)
+  return var_to_bytes(data)
+  
+func load(serial):
+  var data = bytes_to_var(serial)
+  for key in data:
+    var value = data[key]  
+    Global[key] = value
+  get_tree().change_scene_to_file("res://Dungeon.tscn")
+  
