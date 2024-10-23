@@ -20,6 +20,12 @@ func _ready():
   DialogueManager.dialogue_ended.connect(_diag_end)
   DialogueManager.got_dialogue.connect(_diag_received)
   Global.open_inventory.connect(on_inventory)
+  get_tree().get_root().size_changed.connect(resize)
+  resize()
+
+func resize():
+  $Sprite2D.position.x = get_viewport_rect().size.x / 2
+  $Sprite2D.position.y = get_viewport_rect().size.y * .375
 
 func start():
   Global.toggle_map.emit(false)

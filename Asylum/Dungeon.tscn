@@ -81,31 +81,45 @@ libraries = {
 visible = false
 
 [node name="GUI" type="Control" parent="CanvasLayer"]
-visible = false
 z_index = 100
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 51.0
+grow_horizontal = 2
+size_flags_horizontal = 3
 theme = ExtResource("3_uw23p")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/GUI"]
-layout_mode = 0
-offset_right = 720.0
-offset_bottom = 51.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -25.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3_uw23p")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/Panel"]
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/GUI/Panel"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = -6.0
-offset_bottom = 26.0
+anchor_bottom = 0.5
+offset_top = -13.0
+offset_bottom = 13.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 6
 
-[node name="RoomLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/Panel/Margin"]
+layout_mode = 2
+
+[node name="RoomLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0.545098, 1)
@@ -114,7 +128,7 @@ theme_override_font_sizes/normal_font_size = 18
 text = "Prison Cell 6A"
 scroll_active = false
 
-[node name="HealthLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
+[node name="HealthLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0.545098, 1)
@@ -123,7 +137,7 @@ theme_override_font_sizes/normal_font_size = 18
 text = "6 HP
 "
 
-[node name="WeaponLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
+[node name="WeaponLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0.545098, 1)
@@ -131,12 +145,12 @@ theme_override_fonts/normal_font = SubResource("SystemFont_p4m2n")
 theme_override_font_sizes/normal_font_size = 18
 text = "Weapon: Fist"
 
-[node name="InventoryButton" type="Button" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
+[node name="InventoryButton" type="Button" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_u7alg")
 text = "Inventory"
 
-[node name="SaveButton" type="Button" parent="CanvasLayer/GUI/Panel/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_u7alg")
 text = "Save"
@@ -149,8 +163,8 @@ script = null
 texture = ExtResource("7_kp0rp")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GUI/Panel/HBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GUI/Panel/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/Panel/Margin/HBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/Panel/Margin/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 
 [editable path="CanvasLayer/MainMenu"]
 [editable path="CanvasLayer/SecretEncounter"]

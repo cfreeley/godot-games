@@ -108,7 +108,7 @@ func enter_room(loc):
   Global.CurrentLoc = loc
   Global.SeenRooms[loc] = true
   update_can_move()
-  $CanvasLayer/GUI/Panel/HBoxContainer/RoomLabel.text = CurrentRoom.room_title
+  $CanvasLayer/GUI/Panel/Margin/HBoxContainer/RoomLabel.text = CurrentRoom.room_title
   CurrentRoom.enter()
 
 var input_to_dir = {
@@ -133,10 +133,10 @@ func toggle_map(on):
     $CanvasLayer/AnimationPlayer.play_backwards("fadein")
 
 func update_health():
-  $CanvasLayer/GUI/Panel/HBoxContainer/HealthLabel.text = "%s HP" % Global.PlayerStats.Health
+  $CanvasLayer/GUI/Panel/Margin/HBoxContainer/HealthLabel.text = "%s HP" % max(0, Global.PlayerStats.Health)
 
 func update_weapon():
-  $CanvasLayer/GUI/Panel/HBoxContainer/WeaponLabel.text = "Weapon: %s" % Global.CurrentWeapon
+  $CanvasLayer/GUI/Panel/Margin/HBoxContainer/WeaponLabel.text = "Weapon: %s" % Global.CurrentWeapon
 
 func _on_inventory_button_pressed():
   var visible = !$CanvasLayer/Menu.visible

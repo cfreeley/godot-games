@@ -8,8 +8,11 @@ func _input(event):
 
 var canvas_width = 300
 var canvas_height = 300
-var canvas_pos = Vector2(720.0 / 2.0 - (canvas_width / 2.0), 720.0 / 3.0 - (canvas_height / 2.0))
+var canvas_pos = Vector2(0, 60) # Vector2(720.0 / 2.0 - (canvas_width / 2.0), 720.0 / 3.0 - (canvas_height / 2.0))
 func _draw():
+  canvas_height = get_viewport_rect().size.y - 400
+  canvas_width = canvas_height # get_viewport_rect().size.x
+  canvas_pos.x = (get_viewport_rect().size.x - canvas_width) / 2
   var grid_w = 5
   var grid_h = 5
   var buffer = 8

@@ -30,10 +30,15 @@ shortcut_in_tooltip = false
 text = "Start"
 
 [node name="Label" type="RichTextLabel" parent="."]
-layout_mode = 2
-offset_top = 319.0
-offset_right = 720.0
-offset_bottom = 384.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -18.5
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("1_106ta")
 theme_override_font_sizes/normal_font_size = 32
