@@ -31,7 +31,6 @@ func _on_visibility_changed():
     box.button_group = bgroup
     box.button_pressed = Global.CurrentWeapon == weapon
     $MarginContainer/VBoxContainer/HBoxContainer/Inventory/Items.add_child(box)
-    print(box.name)
   for key in Global.Keys.keys():
     if key.contains("$HIDE"):
       continue

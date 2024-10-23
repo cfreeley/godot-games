@@ -37,6 +37,8 @@ signal get_pistol_ammo(amount)
 signal weapon_change(source)
 @warning_ignore("unused_signal")
 signal game_end(source)
+@warning_ignore("unused_signal")
+signal load_game(file)
 
 var PlayerStats := {
   'Might': 2,
@@ -102,26 +104,32 @@ var Center = Entrance + UP
 var Back = Center + UP
 var NW_Corner = Back + LEFT
 var NE_Corner = Back + RIGHT
-var Map := {
-  Start: preload("res://rooms/PlayerCell.tscn").instantiate(),
-  Entrance: preload("res://rooms/EntranceWay.tscn").instantiate(),
-  SE_Corner: preload("res://rooms/ScratchedJunction.tscn").instantiate(),
-  (SE_Corner + DOWN): preload("res://rooms/Sanctum.tscn").instantiate(),
-  SW_Corner: preload("res://rooms/EmptyHall.tscn").instantiate(),
-  (SW_Corner + DOWN): preload("res://rooms/RadioCell.tscn").instantiate(),
-  (SW_Corner + LEFT): preload("res://rooms/AnarchistRoom.tscn").instantiate(),
-  Center: preload("res://rooms/BasementStairway.tscn").instantiate(),
-  (Center + LEFT): preload("res://rooms/ScratchedJunction.tscn").instantiate(),
-  (Center + RIGHT): preload("res://rooms/RiddleHall.tscn").instantiate(),
-  (Center + RIGHT + RIGHT): preload("res://rooms/PaddedRoom.tscn").instantiate(),
-  Back: preload("res://rooms/DamagedHall.tscn").instantiate(),
-  (Back + UP): preload("res://rooms/Office.tscn").instantiate(),
-  NE_Corner: preload("res://rooms/NortheastCorner.tscn").instantiate(),
-  (NE_Corner + UP): preload("res://rooms/ControlRoom.tscn").instantiate(),
-  NW_Corner: preload("res://rooms/NorthwestCorner.tscn").instantiate(),
-  (NW_Corner + UP): preload("res://rooms/ObservationRoom.tscn").instantiate(),
-  (NW_Corner + UP + LEFT): preload("res://rooms/SecureContainment.tscn").instantiate(),
+
+var BasementTemplate := {
+  Start: preload("res://rooms/PlayerCell.tscn"),
+  Entrance: preload("res://rooms/EntranceWay.tscn"),
+  SE_Corner: preload("res://rooms/ScratchedJunction.tscn"),
+  (SE_Corner + DOWN): preload("res://rooms/Sanctum.tscn"),
+  SW_Corner: preload("res://rooms/EmptyHall.tscn"),
+  (SW_Corner + DOWN): preload("res://rooms/RadioCell.tscn"),
+  (SW_Corner + LEFT): preload("res://rooms/AnarchistRoom.tscn"),
+  Center: preload("res://rooms/BasementStairway.tscn"),
+  (Center + LEFT): preload("res://rooms/ScratchedJunction.tscn"),
+  (Center + RIGHT): preload("res://rooms/RiddleHall.tscn"),
+  (Center + RIGHT + RIGHT): preload("res://rooms/PaddedRoom.tscn"),
+  Back: preload("res://rooms/DamagedHall.tscn"),
+  (Back + UP): preload("res://rooms/Office.tscn"),
+  NE_Corner: preload("res://rooms/NortheastCorner.tscn"),
+  (NE_Corner + UP): preload("res://rooms/ControlRoom.tscn"),
+  NW_Corner: preload("res://rooms/NorthwestCorner.tscn"),
+  (NW_Corner + UP): preload("res://rooms/ObservationRoom.tscn"),
+  (NW_Corner + UP + LEFT): preload("res://rooms/SecureContainment.tscn"),
 }
+func init_map(template : Dictionary):
+  Map = {}
+  for key in template.keys():
+    Map[key] = template[key].instantiate()
+var Map := {}
 
 var Keys := {}
 var riddle1 = false
@@ -172,3 +180,16 @@ var HasLootedPistolAmmo = false
 
 var GuardStatus = "locked" # "escaped" | "dead" | "locked"
 var DoorStatus # "containment" | "observation" | "both"
+
+
+func serialize():
+  var empty = Node.new()
+  var data = {}
+
+  for prop in Global.get_property_list():
+    var pname = prop.name
+    if pname == "Global.gd" or empty.get_property_list().any(func(p): return p.name == pname):
+      continue
+    data[pname] = Global[pname]
+  data.Map = {}
+  return JSON.stringify(data)

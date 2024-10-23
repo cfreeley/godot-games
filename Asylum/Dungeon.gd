@@ -5,6 +5,8 @@ var LastLoc : Vector2
 var endings = preload("res://GameEndings.dialogue")
 
 func _ready():
+  Global.serialize()
+  Global.init_map(Global.BasementTemplate)
   $CanvasLayer/MainMenu.show()
   Global.room_move.connect(move_by)
   Global.gain_key.connect(get_key)
@@ -38,7 +40,6 @@ func get_key(key):
 
 func get_item(item):
   Global.Weapons[item].owned = true
-  print(Global.Weapons[item], item)
   
 func get_pistol():
   Global.Weapons.Pistol["owned"] = true
@@ -98,7 +99,6 @@ func enter_room(loc):
   Global.CurrentLoc = loc
   Global.SeenRooms[loc] = true
   update_can_move()
-  print(Global.CanMove)
   $CanvasLayer/GUI/Panel/HBoxContainer/RoomLabel.text = CurrentRoom.room_title
   CurrentRoom.enter()
 
@@ -130,7 +130,6 @@ func _on_start_button_pressed():
 
 func toggle_map(on):
   $CanvasLayer/Map.visible = true
-  print($CanvasLayer/Map.modulate.a)
   if on and $CanvasLayer/Map.modulate.a == 0:
     $CanvasLayer/AnimationPlayer.play("fadein")
   elif !on and $CanvasLayer/Map.modulate.a == 1:

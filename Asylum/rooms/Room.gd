@@ -28,7 +28,6 @@ func enter():
 func investigate():
   if !is_active:
     return
-  print(self)
   DialogueManager.show_dialogue_balloon(room_diag, "investigate")
   
 func move(_dir: Vector2):
