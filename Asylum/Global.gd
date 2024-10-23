@@ -45,6 +45,7 @@ signal load_game(file)
 var CleanSave
 var QuickSave
 func _ready():
+  DisplayServer.window_set_min_size(Vector2i(360, 360))
   CleanSave = serialize()
 
 var PlayerStats := {

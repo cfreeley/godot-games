@@ -81,6 +81,7 @@ libraries = {
 visible = false
 
 [node name="GUI" type="Control" parent="CanvasLayer"]
+visible = false
 z_index = 100
 layout_mode = 3
 anchors_preset = 10
