@@ -40,27 +40,27 @@ func _enter_tree() -> void:
 		add_translation_parser_plugin(translation_parser_plugin)
 
 		main_view = MainView.instantiate()
-		get_editor_interface().get_editor_main_screen().add_child(main_view)
+		EditorInterface.get_editor_main_screen().add_child(main_view)
 		_make_visible(false)
 		main_view.add_child(dialogue_cache)
 
 		_update_localization()
 
-		get_editor_interface().get_file_system_dock().files_moved.connect(_on_files_moved)
-		get_editor_interface().get_file_system_dock().file_removed.connect(_on_file_removed)
+		EditorInterface.get_file_system_dock().files_moved.connect(_on_files_moved)
+		EditorInterface.get_file_system_dock().file_removed.connect(_on_file_removed)
 
 		add_tool_menu_item("Create copy of dialogue example balloon...", _copy_dialogue_balloon)
 
 		# Prevent the project from showing as unsaved even though it was only just opened
 		if DialogueSettings.get_setting("try_suppressing_startup_unsaved_indicator", false) \
 			and Engine.get_physics_frames() == 0 \
-			and get_editor_interface().has_method("save_all_scenes"):
+			and EditorInterface.has_method("save_all_scenes"):
 			var timer: Timer = Timer.new()
 			var suppress_unsaved_marker: Callable
 			suppress_unsaved_marker = func():
 				if Engine.get_frames_per_second() >= 10:
 					timer.stop()
-					get_editor_interface().call("save_all_scenes")
+					EditorInterface.call("save_all_scenes")
 					timer.queue_free()
 			timer.timeout.connect(suppress_unsaved_marker)
 			add_child(timer)
@@ -85,8 +85,8 @@ func _exit_tree() -> void:
 	Engine.remove_meta("DialogueManagerPlugin")
 	Engine.remove_meta("DialogueCache")
 
-	get_editor_interface().get_file_system_dock().files_moved.disconnect(_on_files_moved)
-	get_editor_interface().get_file_system_dock().file_removed.disconnect(_on_file_removed)
+	EditorInterface.get_file_system_dock().files_moved.disconnect(_on_files_moved)
+	EditorInterface.get_file_system_dock().file_removed.disconnect(_on_file_removed)
 
 	remove_tool_menu_item("Create copy of dialogue example balloon...")
 
@@ -109,7 +109,7 @@ func _get_plugin_icon() -> Texture2D:
 
 
 func _handles(object) -> bool:
-	var editor_settings: EditorSettings = get_editor_interface().get_editor_settings()
+	var editor_settings: EditorSettings = EditorInterface.get_editor_settings()
 	var external_editor: String = editor_settings.get_setting("text_editor/external/exec_path")
 	var use_external_editor: bool = editor_settings.get_setting("text_editor/external/use_external_editor") and external_editor != ""
 	if object is DialogueResource and use_external_editor and DialogueSettings.get_user_value("open_in_external_editor", false):
@@ -144,7 +144,7 @@ func _build() -> bool:
 		if files_with_errors.size() > 0:
 			for dialogue_file in files_with_errors:
 				push_error("You have %d error(s) in %s" % [dialogue_file.errors.size(), dialogue_file.path])
-			get_editor_interface().edit_resource(load(files_with_errors[0].path))
+			EditorInterface.edit_resource(load(files_with_errors[0].path))
 			main_view.show_build_error_dialog()
 			return false
 
@@ -191,7 +191,7 @@ func get_editor_shortcuts() -> Dictionary:
 		]
 	}
 
-	var paths = get_editor_interface().get_editor_paths()
+	var paths = EditorInterface.get_editor_paths()
 	var settings
 	if FileAccess.file_exists(paths.get_config_dir() + "/editor_settings-4.3.tres"):
 		settings = load(paths.get_config_dir() + "/editor_settings-4.3.tres")
@@ -305,7 +305,7 @@ func _update_localization() -> void:
 
 
 func _copy_dialogue_balloon() -> void:
-	var scale: float = get_editor_interface().get_editor_scale()
+	var scale: float = EditorInterface.get_editor_scale()
 	var directory_dialog: FileDialog = FileDialog.new()
 	var label: Label = Label.new()
 	label.text = "Dialogue balloon files will be copied into chosen directory."
@@ -340,14 +340,14 @@ func _copy_dialogue_balloon() -> void:
 		file.store_string(file_contents)
 		file.close()
 
-		get_editor_interface().get_resource_filesystem().scan()
-		get_editor_interface().get_file_system_dock().call_deferred("navigate_to_path", balloon_path)
+		EditorInterface.get_resource_filesystem().scan()
+		EditorInterface.get_file_system_dock().call_deferred("navigate_to_path", balloon_path)
 
 		DialogueSettings.set_setting("balloon_path", balloon_path)
 
 		directory_dialog.queue_free()
 	)
-	get_editor_interface().get_base_control().add_child(directory_dialog)
+	EditorInterface.get_base_control().add_child(directory_dialog)
 	directory_dialog.popup_centered()
 
 
