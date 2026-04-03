@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c78gmsxuovs7d"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_02sbb"]
+[ext_resource type="Resource" uid="uid://bpbp78gsomn7x" path="res://rooms/AnarchistRoom.dialogue" id="2_x2846"]
+
+[node name="AnarchistRoom" instance=ExtResource("1_02sbb")]
+room_title = "Anarchist's Cell"
+room_diag = ExtResource("2_x2846")

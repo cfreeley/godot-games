@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dml7670fcv27q"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_bduan"]
+[ext_resource type="Resource" uid="uid://crrqxqme2a8at" path="res://rooms/NorthwestCorner.dialogue" id="2_3y4qy"]
+
+[node name="NorthwestCorner" instance=ExtResource("1_bduan")]
+room_title = "Northwest Corner"
+room_diag = ExtResource("2_3y4qy")

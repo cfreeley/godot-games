@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bdqvx6yipjyus"
+path="res://.godot/imported/ControlRoom.dialogue-e26114f32613f26546356a59d11df2bb.tres"
+
+[deps]
+
+source_file="res://rooms/ControlRoom.dialogue"
+dest_files=["res://.godot/imported/ControlRoom.dialogue-e26114f32613f26546356a59d11df2bb.tres"]
+
+[params]
+
+defaults=true

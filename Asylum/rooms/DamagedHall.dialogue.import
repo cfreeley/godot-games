@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://camitrdrnmoif"
+path="res://.godot/imported/DamagedHall.dialogue-5a20cf6b5d8921c43ec6e337a8d6897d.tres"
+
+[deps]
+
+source_file="res://rooms/DamagedHall.dialogue"
+dest_files=["res://.godot/imported/DamagedHall.dialogue-5a20cf6b5d8921c43ec6e337a8d6897d.tres"]
+
+[params]
+
+defaults=true

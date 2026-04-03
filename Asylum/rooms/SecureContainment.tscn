@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://p1irwfyiqx5l"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_m8il2"]
+[ext_resource type="Resource" uid="uid://mkf103t4c61v" path="res://rooms/SecureContainment.dialogue" id="2_nm8m3"]
+
+[node name="SecureContainment" instance=ExtResource("1_m8il2")]
+room_title = "Secure Containment"
+room_diag = ExtResource("2_nm8m3")

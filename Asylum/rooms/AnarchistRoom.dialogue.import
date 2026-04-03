@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bpbp78gsomn7x"
+path="res://.godot/imported/AnarchistRoom.dialogue-1c4cdefa2880884b0261ceb2c2457c7b.tres"
+
+[deps]
+
+source_file="res://rooms/AnarchistRoom.dialogue"
+dest_files=["res://.godot/imported/AnarchistRoom.dialogue-1c4cdefa2880884b0261ceb2c2457c7b.tres"]
+
+[params]
+
+defaults=true

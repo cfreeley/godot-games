@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bqqcg4tfgq8ft"
+path="res://.godot/imported/PlayerCell.dialogue-80bea79c048957191c4f570ffa3f8c59.tres"
+
+[deps]
+
+source_file="res://rooms/PlayerCell.dialogue"
+dest_files=["res://.godot/imported/PlayerCell.dialogue-80bea79c048957191c4f570ffa3f8c59.tres"]
+
+[params]
+
+defaults=true

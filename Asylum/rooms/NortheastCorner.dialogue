@@ -1,0 +1,10 @@
+~ intro
+You are in the northeast corner of the basement.
+=> END!
+
+~ investigate
+The door in front of you reads "Security".
+if !HasLootedPistolAmmo:
+	The dead inmate lies on the ground. Clutched in its hand is 2 Pistol bullets.
+	do Global.get_pistol_ammo.emit(2)
+=> END!

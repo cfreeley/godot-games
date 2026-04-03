@@ -1,0 +1,13 @@
+~ intro
+You are in a padded cell covered in red markings.
+=> END!
+
+~ investigate
+if HasIncantation:
+	You're beginning to like this room too much. Best not to dawdle.
+	=> END!
+You stare at the markings left by the woman, mesmerized.
+[speed=0.2]Time passes. [wait=.5][speed=0.5]You're not sure how much. [speed=1.0]You realize you're chanting a phrase in a language you've never heard before.
+You can now recite the Incantation.
+set Global.HasIncantation = true
+=> END!

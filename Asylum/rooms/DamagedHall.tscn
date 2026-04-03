@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyosued1euq1b"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_n324n"]
+[ext_resource type="Resource" uid="uid://camitrdrnmoif" path="res://rooms/DamagedHall.dialogue" id="2_i7128"]
+[ext_resource type="PackedScene" uid="uid://drwugmpukxcrf" path="res://encounters/Encounter.tscn" id="3_bi7d0"]
+[ext_resource type="Texture2D" uid="uid://3f5xcimkprkj" path="res://img/brute.png" id="4_i7pxs"]
+
+[node name="DamagedHall" node_paths=PackedStringArray("encounter") instance=ExtResource("1_n324n")]
+room_title = "Bruised Hallway"
+room_diag = ExtResource("2_i7128")
+encounter = NodePath("Encounter")
+
+[node name="Encounter" parent="." index="0" instance=ExtResource("3_bi7d0")]
+texture = ExtResource("4_i7pxs")
+title = "Grinning Brute"
+en_name = "brute"
+en_hp = 5
+en_might = 3
+en_dmg = 4

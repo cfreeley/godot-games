@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlxasxhna6u47"]
+
+[ext_resource type="Script" path="res://Dungeon.gd" id="1_4o8wi"]
+[ext_resource type="PackedScene" uid="uid://ctw8oukva4il8" path="res://MainMenu.tscn" id="2_k3a3m"]
+[ext_resource type="Script" path="res://Map.gd" id="3_8cieb"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_cxsv2"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_b8sy6"]
+button_index = 6
+
+[sub_resource type="InputEventKey" id="InputEventKey_glb7s"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="InputEventKey" id="InputEventKey_6tgxl"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_jtyjg"]
+events = [SubResource("InputEventJoypadButton_cxsv2"), SubResource("InputEventJoypadButton_b8sy6"), SubResource("InputEventKey_glb7s"), SubResource("InputEventKey_6tgxl")]
+
+[node name="Dungeon" type="Node2D"]
+script = ExtResource("1_4o8wi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("2_k3a3m")]
+visible = false
+offset_left = -1.0
+offset_right = -1.0
+
+[node name="StartButton" parent="CanvasLayer/MainMenu/VBoxContainer" index="1"]
+shortcut = SubResource("Shortcut_jtyjg")
+
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource("3_8cieb")
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+
+[editable path="CanvasLayer/MainMenu"]

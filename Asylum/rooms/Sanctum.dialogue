@@ -1,0 +1,15 @@
+~ intro
+You enter a cell with a makeshift altar to Saint Kalina. You feel calm in her presence.
+=> END!
+
+~ investigate
+if RemainingTears <= 0:
+	The statue is all dried up.
+	=> END
+Saint Kalina the Grotesque is the patron saint of the inmates here. Her statue is leaking greenish water from her eyes.
+Drink the water? ({{RemainingTears}} uses left.)
+- Yes
+	You feel rejuvenated.
+	do Global.drink_fountain.emit()
+- No
+=> END!

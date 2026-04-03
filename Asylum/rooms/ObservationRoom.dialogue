@@ -1,0 +1,23 @@
+~ intro
+You enter a room with a set of chairs and a glass window looking into the adjoining room.
+if GuardStatus == "dead":
+	Your attention is immediately drawn to a mess of blood and guts on the floor.
+=> END!
+
+~ investigate
+if GuardStatus == "dead":
+	=> corpse
+elif GuardStatus == "escaped":
+	Whoever called you from this room is long gone now.
+else:
+	Dev: You broke the game. Congrats!
+=> END
+
+~ corpse
+There is a hideous pile of blood and meat rolled up into a ball. Any resemblance to a human is long gone.
+if !Keys.has("Guard's Key"):
+	Besides the [wait=.4]pile is a few personal belongings laid neatly on the floor. Amazingly, there is not a drop of blood on them.
+	You find a Pistol with 4 bullets and the Guard's Key.
+	do Global.gain_key.emit("Guard's Key")
+	do Global.get_pistol.emit()
+=> END!

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://0swkyv8c67f0"
+path="res://.godot/imported/BasementStairway.dialogue-007914588c740c0f2c45d49536cc9ee4.tres"
+
+[deps]
+
+source_file="res://rooms/BasementStairway.dialogue"
+dest_files=["res://.godot/imported/BasementStairway.dialogue-007914588c740c0f2c45d49536cc9ee4.tres"]
+
+[params]
+
+defaults=true

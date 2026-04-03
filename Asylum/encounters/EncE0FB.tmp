@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://drwugmpukxcrf"]
+
+[ext_resource type="Script" path="res://encounters/Encounter.gd" id="1_kkrtb"]
+[ext_resource type="Shader" path="res://SpriteShader.gdshader" id="2_1qb6i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qp2n5"]
+shader = ExtResource("2_1qb6i")
+
+[node name="Encounter" type="Node2D"]
+script = ExtResource("1_kkrtb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qp2n5")
+position = Vector2(360, 270)
+scale = Vector2(0.5, 0.5)

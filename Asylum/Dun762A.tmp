@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlxasxhna6u47"]
+
+[ext_resource type="Script" path="res://Dungeon.gd" id="1_4o8wi"]
+[ext_resource type="PackedScene" uid="uid://dlnc1igdeb5id" path="res://rooms/PlayerCell.tscn" id="2_ym8cn"]
+
+[node name="Dungeon" type="Node2D"]
+script = ExtResource("1_4o8wi")
+CurrentRoom = ExtResource("2_ym8cn")
