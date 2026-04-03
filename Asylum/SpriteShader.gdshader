@@ -3,8 +3,8 @@ shader_type canvas_item;
 void fragment() {
   vec4 input_color = texture(TEXTURE, UV);
   float avg = (input_color.r + input_color.g + input_color.b) / 2.0;
-  if (avg > .8) {
-    COLOR = vec4(1.0,0,0,0.0);
+  if (avg < .2) {
+    COLOR = vec4(1.0,0,0,0);
   }
   vec2 dir = UV - vec2(.5,.5);
 	float radius = length(dir) * 2.0;
