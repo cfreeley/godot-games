@@ -33,8 +33,7 @@ func _ready() -> void:
 func reimport_files(files: PackedStringArray = []) -> void:
 	if files.is_empty(): files = get_files()
 
-	var file_system: EditorFileSystem = Engine.get_meta("DialogueManagerPlugin") \
-		.get_editor_interface() \
+	var file_system: EditorFileSystem = EditorInterface \
 		.get_resource_filesystem()
 
 	# NOTE: Godot 4.2rc1 has an issue with reimporting more than one
