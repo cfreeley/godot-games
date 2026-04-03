@@ -23,6 +23,8 @@ func _ready():
   Global.reset.connect(reset)
   if Global.skip_to_start:
     _on_start_button_pressed()
+  else:
+    $CanvasLayer/MainMenu/StartButton.grab_focus()
   Global.skip_to_start = true
 
 func game_end(source):
