@@ -81,7 +81,7 @@ func _on_file_dialog_canceled() -> void:
 
 func _on_resource_button_pressed() -> void:
 	if is_instance_valid(resource):
-		editor_EditorInterface.call_deferred("edit_resource", resource)
+		EditorInterface.call_deferred("edit_resource", resource)
 	else:
 		build_menu()
 		menu.position = get_viewport().position + Vector2i(
@@ -123,13 +123,13 @@ func _on_menu_id_pressed(id: int) -> void:
 			open_dialog.popup_centered()
 
 		ITEM_EDIT:
-			editor_EditorInterface.call_deferred("edit_resource", resource)
+			EditorInterface.call_deferred("edit_resource", resource)
 
 		ITEM_CLEAR:
 			resource_changed.emit(null)
 
 		ITEM_FILESYSTEM:
-			var file_system = editor_EditorInterface.get_file_system_dock()
+			var file_system = EditorInterface.get_file_system_dock()
 			file_system.navigate_to_path(resource.resource_path)
 
 
