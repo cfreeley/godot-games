@@ -1,0 +1,102 @@
+[
+  {
+    "id": "entrance_hall",
+    "name": "Entrance Hall",
+    "rarity": "common",
+    "cost": { "gold": 0 },
+    "produces": { "gold": 1 },
+    "threat_chance": 0.0,
+    "card_effect": "draw_card",
+    "description": "Draw 1 extra card."
+  },
+  {
+    "id": "bedroom",
+    "name": "Bedroom",
+    "rarity": "common",
+    "cost": { "gold": 2 },
+    "produces": { "gold": 1 },
+    "threat_chance": 0.05,
+    "card_effect": "restore_hp",
+    "description": "Restore 2 HP."
+  },
+  {
+    "id": "kitchen",
+    "name": "Kitchen",
+    "rarity": "common",
+    "cost": { "gold": 2 },
+    "produces": { "gold": 2 },
+    "threat_chance": 0.05,
+    "card_effect": "",
+    "description": "Hearty meals keep the household going."
+  },
+  {
+    "id": "library",
+    "name": "Library",
+    "rarity": "common",
+    "cost": { "gold": 2 },
+    "produces": { "gold": 1, "insight": 1 },
+    "threat_chance": 0.05,
+    "card_effect": "gain_insight",
+    "description": "Gain 1 extra Insight when drawn."
+  },
+  {
+    "id": "workshop",
+    "name": "Workshop",
+    "rarity": "common",
+    "cost": { "gold": 2 },
+    "produces": { "gold": 2 },
+    "threat_chance": 0.1,
+    "card_effect": "gain_gold",
+    "description": "Gain 2 extra Gold when drawn."
+  },
+  {
+    "id": "garden",
+    "name": "Garden",
+    "rarity": "common",
+    "cost": { "gold": 2 },
+    "produces": { "gold": 1 },
+    "threat_chance": 0.0,
+    "card_effect": "restore_hp",
+    "description": "A moment of calm. Restore 1 HP."
+  },
+  {
+    "id": "cellar",
+    "name": "Cellar",
+    "rarity": "uncommon",
+    "cost": { "gold": 3 },
+    "produces": { "gold": 3 },
+    "threat_chance": 0.2,
+    "card_effect": "",
+    "description": "Something stirs below."
+  },
+  {
+    "id": "study",
+    "name": "Study",
+    "rarity": "uncommon",
+    "cost": { "gold": 3 },
+    "produces": { "gold": 1, "insight": 2 },
+    "threat_chance": 0.1,
+    "card_effect": "gain_insight",
+    "description": "Gain 2 extra Insight when drawn."
+  },
+  {
+    "id": "ritual_chamber",
+    "name": "Ritual Chamber",
+    "rarity": "cursed",
+    "cost": { "gold": 3 },
+    "produces": { "arcana": 3 },
+    "threat_chance": 0.35,
+    "card_effect": "arcane_surge",
+    "description": "Draws power from the void."
+  },
+  {
+    "id": "crypt",
+    "name": "Crypt",
+    "rarity": "cursed",
+    "cost": { "gold": 3 },
+    "produces": { "arcana": 2, "gold": 1 },
+    "threat_chance": 0.4,
+    "card_effect": "arcane_drain",
+    "description": "The dead do not rest easy here."
+  }
+]

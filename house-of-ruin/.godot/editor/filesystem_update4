@@ -1,0 +1,3 @@
+res://scenes/Main.gd
+res://scenes/cards/CardView.gd
+res://scenes/house/TileSlot.gd
