@@ -1,0 +1,10 @@
+~ intro
+You are in hallway showing serious signs of damage
+=> END!
+
+~ investigate
+The walls and floor have been repeatedly smashed.
+if !Weapons["Pipe"].get("owned"):
+	You grab the lead pipe that brute was wielding.
+	do Global.gain_item.emit("Pipe")
+=> END!

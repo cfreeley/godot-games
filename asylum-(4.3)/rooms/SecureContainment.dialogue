@@ -1,0 +1,20 @@
+~ intro
+You are in a spotless cell. There is a thick glass window to the Observation Room but you cannot seem to see through it.
+=> END!
+
+~ investigate
+if HasBoost:
+	You feel warm, as if your friend was still in this cell with you.
+	=> END!
+The only thing in the cell appears to be a small hand mirror. On the glass, in red ink, is a message\: "For you, my friend."
+You see your reflection in the mirror, except something looks different. What is it exactly?
+- I look strong and commanding
+	You gain 1 Might.
+	do Global.stat_boost.emit("Might")
+- I look lean and graceful
+	You gain 1 Agility.
+	do Global.stat_boost.emit("Agility")
+- I look confident and self-assured
+	You gain 1 Arcana.
+	do Global.stat_boost.emit("Arcana")
+=> END!

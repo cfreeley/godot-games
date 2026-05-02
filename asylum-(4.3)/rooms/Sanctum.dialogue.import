@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://dyrlu4tdtev66"
+path="res://.godot/imported/Sanctum.dialogue-66cab59acfeb34c6bb6de2e5fc37765b.tres"
+
+[deps]
+
+source_file="res://rooms/Sanctum.dialogue"
+dest_files=["res://.godot/imported/Sanctum.dialogue-66cab59acfeb34c6bb6de2e5fc37765b.tres"]
+
+[params]
+
+defaults=true

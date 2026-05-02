@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dewo2mfgg5f8m"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_3l30g"]
+[ext_resource type="Resource" uid="uid://c3i2082v1a6vo" path="res://rooms/NortheastCorner.dialogue" id="2_0ybde"]
+[ext_resource type="PackedScene" uid="uid://drwugmpukxcrf" path="res://encounters/Encounter.tscn" id="2_y4n1i"]
+[ext_resource type="Texture2D" uid="uid://bbu4svw06y24f" path="res://img/skinless.png" id="3_suowb"]
+
+[node name="NortheastCorner" node_paths=PackedStringArray("encounter") instance=ExtResource("1_3l30g")]
+room_title = "Northeast Corner"
+room_diag = ExtResource("2_0ybde")
+encounter = NodePath("Encounter")
+
+[node name="Encounter" parent="." index="0" instance=ExtResource("2_y4n1i")]
+texture = ExtResource("3_suowb")
+title = "Skinless Inmate"
+en_name = "skinless"
+en_hp = 2
+en_might = 1
+en_dmg = 1

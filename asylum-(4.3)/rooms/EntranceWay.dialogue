@@ -1,0 +1,9 @@
+~ intro
+You are in the southern corridor of the basement. In front of you are the stairs leading up, but they are locked behind a grated door.
+=> END!
+
+~ investigate
+if Weapons.Knife.get("owned") == null:
+	Grabbed the Rusty Knife from the corpse.
+	do gain_item.emit("Knife")
+The door to the staircase doesn't budge. It looks like you'll need the guard's key to open it.

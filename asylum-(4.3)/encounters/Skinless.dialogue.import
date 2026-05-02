@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bo04bl7pij8ak"
+path="res://.godot/imported/Skinless.dialogue-3112c961f53e35045c0506c384cfa2ff.tres"
+
+[deps]
+
+source_file="res://encounters/Skinless.dialogue"
+dest_files=["res://.godot/imported/Skinless.dialogue-3112c961f53e35045c0506c384cfa2ff.tres"]
+
+[params]
+
+defaults=true

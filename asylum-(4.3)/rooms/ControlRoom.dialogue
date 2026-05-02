@@ -1,0 +1,56 @@
+~ intro
+You are in what appears to be a security room. The room is filled with monitors and switches.
+=> END!
+
+~ investigate
+The center wall is filled with various monitors showing all the cells. Underneath it is a control panel with several switches.
+=> choose
+
+~ choose
+What do you which to examine?
+- Look at the monitor
+	=> monitor
+- Look at the control panel
+	=> panel
+- Leave.
+=> END!
+
+~ monitor
+There are 6 screens on the wall. 4 show empty cell rooms, while the fifth displays only static.
+if DoorStatus == "containment" or DoorStatus == "both":
+	A sixth, labeled "High-security Inmate" is completely black.
+	=> END!
+There is a sixth screen with the label "High-security Inmate". You can barely make out the figure of a man, covered in[wait=.2] a wiry substance.
+But its hard to see because the image is obscured by various swirling colors. It's odd..[wait=.2] the other screens appear to be black-and-white.
+=> choose
+
+~ panel
+The panel is filled with various lights and switches. One section is labeled "Emergency Door Locks", with two switches, both raised. One is marked "Observation" and the other is marked "Inmate Containment".
+~ panelchoice
+if DoorStatus == "containment" or DoorStatus == "observation":
+	You have released one of the two door locks. Release the other?
+	- Yes
+		You feel a strange sensation in your head. It's oddly[wait=.2] warm.
+		do Global.toggle_switch.emit("both")
+	- No
+	=> END!
+elif DoorStatus == "both":
+	You have already released both locks.
+	=> END!
+if HasHeardRadio:
+	Flipping the first switch will probably let the guard escape, while flipping the second will likely release whoever[wait=.2] or whatever[wait=.2] he was observing.
+What do you do?
+- Release the "Observation" lock
+	You release the switch. Immediately you hear a rush of footsteps from down the hall, and then shortly after, the sound of gunshots.
+	You then hear the sound of a creaky door opening, followed by the sound of footsteps on stair steps, and then, silence.
+	do Global.toggle_switch.emit("observation")
+	=> panelchoice
+- Release the "Containment" lock
+	You hear a commotion from down the hall. What sounds like muffled screaming, followed by gun shots. And then, silence.
+	do Global.toggle_switch.emit("containment")
+	=> panelchoice
+- Release both locks.
+	You hear a commotion from down the hall. What sounds like muffled screaming, followed by gun shots. And then, silence.
+	do Global.toggle_switch.emit("both")
+- Leave
+=> END!

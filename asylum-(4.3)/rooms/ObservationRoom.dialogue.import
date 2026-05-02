@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://b0wav1vu422ew"
+path="res://.godot/imported/ObservationRoom.dialogue-c16f43aa3ec5bf3634d6012b787e0a40.tres"
+
+[deps]
+
+source_file="res://rooms/ObservationRoom.dialogue"
+dest_files=["res://.godot/imported/ObservationRoom.dialogue-c16f43aa3ec5bf3634d6012b787e0a40.tres"]
+
+[params]
+
+defaults=true

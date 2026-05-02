@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://b0irujt3l3s2m"
+path="res://.godot/imported/EmptyHall.dialogue-00a9aa7f986a2bb7dd102b4807cb6295.tres"
+
+[deps]
+
+source_file="res://rooms/EmptyHall.dialogue"
+dest_files=["res://.godot/imported/EmptyHall.dialogue-00a9aa7f986a2bb7dd102b4807cb6295.tres"]
+
+[params]
+
+defaults=true

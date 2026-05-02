@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://mkf103t4c61v"
+path="res://.godot/imported/SecureContainment.dialogue-07a3dc52e11aa05adb80ba774d215c75.tres"
+
+[deps]
+
+source_file="res://rooms/SecureContainment.dialogue"
+dest_files=["res://.godot/imported/SecureContainment.dialogue-07a3dc52e11aa05adb80ba774d215c75.tres"]
+
+[params]
+
+defaults=true

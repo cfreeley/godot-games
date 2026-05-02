@@ -1,0 +1,29 @@
+~ intro
+You enter an empty cell. There is a table with a few belongings arranged neatly.
+=> END!
+
+~ investigate
+if HasHeardRadio:
+	The guard is no longer talking on the walkie, but it would be hard to forget his words. Toggle the "Observation" switch in the northeast security room, and do not touch the other one.
+	=> END!
+You see a walkie-talkie on the desk. You put it up to your ear and hear a gruff voice.
+???: Mayday! Mayday! This is Officer Herman Potts, does anyone copy?
+- "Hello?"
+	=> radio
+- Don't respond
+=> END!
+
+~ radio
+Potts: About time! Officer in need of assistance. I've been hiding out in the Observation Room at the end of the west corridor. I ran over here when the loonies got loose, but then those damn security doors locked me in. Now I can't get out! 
+Potts: Listen up! Go to the security room in the Northeast corner and unlock it. There should be a control panel there, you just have to flip the switch. Then I can shoot my way outta here, got my Pistol at the ready. 
+Potts: Uh, [wait=.4]I mean WE can shoot our way outta here. I mean, you’re not one of those loonies are you?
+- "..No"
+- "Yes"
+- Say nothing.
+Potts: Huh. [wait=.2]Well, listen. Flip that “Observation” switch and uh…[wait=.2] I’ll be sure to help you get outta here too.
+Potts: Just don’t hit the other switch, the one marked "Containment". Don’t even worry your pretty head about that one. 
+Potts: We can help each other out here right, loony?
+- "Yes."
+- Don't respond
+Potts: Well alright then.
+set HasHeardRadio = true

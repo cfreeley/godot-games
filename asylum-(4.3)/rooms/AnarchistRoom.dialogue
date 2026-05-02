@@ -1,0 +1,11 @@
+~ intro
+An empty cell filled with bottles of strange liquids. The walls are covered in strange-colored stains.
+=> END!
+
+~ investigate
+if HasMolotov != null:
+	All you see is strange bottles of unknown liquids. Nothing you trust or would know what to do with.
+	=> END!
+Among the unrecognizable bottles, you spot familiar shape- a Molotov cocktail.
+set HasMolotov = true
+=> END!

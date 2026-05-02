@@ -1,0 +1,34 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://cpdk1brm13nqd"
+path="res://.godot/imported/SilentHunterIII Font.ttf-88ba3576fe2631071da4029a2719df4f.fontdata"
+
+[deps]
+
+source_file="res://SilentHunterIII Font.ttf"
+dest_files=["res://.godot/imported/SilentHunterIII Font.ttf-88ba3576fe2631071da4029a2719df4f.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

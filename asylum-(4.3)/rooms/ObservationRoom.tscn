@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://de1ohi8salakw"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_xaxio"]
+[ext_resource type="Resource" uid="uid://b0wav1vu422ew" path="res://rooms/ObservationRoom.dialogue" id="2_uqdyo"]
+
+[node name="ObservationRoom" instance=ExtResource("1_xaxio")]
+room_title = "Observation Room"
+room_diag = ExtResource("2_uqdyo")

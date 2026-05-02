@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://pui3344viyrx"
+path="res://.godot/imported/RiddleHall.dialogue-0d60ebb51e1daa468456265d1246f4b2.tres"
+
+[deps]
+
+source_file="res://rooms/RiddleHall.dialogue"
+dest_files=["res://.godot/imported/RiddleHall.dialogue-0d60ebb51e1daa468456265d1246f4b2.tres"]
+
+[params]
+
+defaults=true

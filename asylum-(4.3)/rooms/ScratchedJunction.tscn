@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://d31t5v6w7rvkl"]
+
+[ext_resource type="PackedScene" uid="uid://cipr121qwujk3" path="res://rooms/Room.tscn" id="1_vdk77"]
+[ext_resource type="Resource" uid="uid://dx73xi2ww7hev" path="res://rooms/ScratchedJunction.dialogue" id="2_jacyp"]
+[ext_resource type="PackedScene" uid="uid://drwugmpukxcrf" path="res://encounters/Encounter.tscn" id="3_muj61"]
+[ext_resource type="Texture2D" uid="uid://5ljtoufdypt8" path="res://img/eyeless.png" id="4_g7kv0"]
+
+[node name="ScratchedJunction" node_paths=PackedStringArray("encounter") instance=ExtResource("1_vdk77")]
+room_title = "Scratched-up Hallway"
+room_diag = ExtResource("2_jacyp")
+encounter = NodePath("Encounter")
+
+[node name="Encounter" parent="." index="0" instance=ExtResource("3_muj61")]
+texture = ExtResource("4_g7kv0")
+title = "Eyeless Creature"
+en_name = "eyeless"
+en_hp = 3
+en_might = 2
+en_agility = -1
+en_dmg = 2

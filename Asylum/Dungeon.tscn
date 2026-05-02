@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlxasxhna6u47"]
+[gd_scene format=3 uid="uid://dlxasxhna6u47"]
 
-[ext_resource type="Script" path="res://Dungeon.gd" id="1_4o8wi"]
+[ext_resource type="Script" uid="uid://cidqmqgtl65wq" path="res://Dungeon.gd" id="1_4o8wi"]
 [ext_resource type="PackedScene" uid="uid://ctw8oukva4il8" path="res://MainMenu.tscn" id="2_k3a3m"]
-[ext_resource type="Script" path="res://Map.gd" id="3_8cieb"]
+[ext_resource type="Script" uid="uid://6aqyqnuxknp6" path="res://Map.gd" id="3_8cieb"]
 [ext_resource type="Theme" uid="uid://by6o11p56lb6l" path="res://game_theme.tres" id="3_uw23p"]
 [ext_resource type="PackedScene" uid="uid://hpcbyqqorcjj" path="res://Inventory.tscn" id="5_0pboq"]
 [ext_resource type="PackedScene" uid="uid://drwugmpukxcrf" path="res://encounters/Encounter.tscn" id="6_ojxj5"]
@@ -40,8 +40,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hl1yx"]
 _data = {
-"RESET": SubResource("Animation_0mek1"),
-"fadein": SubResource("Animation_vl6fs")
+&"RESET": SubResource("Animation_0mek1"),
+&"fadein": SubResource("Animation_vl6fs")
 }
 
 [sub_resource type="SystemFont" id="SystemFont_p4m2n"]
@@ -57,30 +57,28 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 [sub_resource type="Theme" id="Theme_u7alg"]
 Button/styles/normal = SubResource("StyleBoxFlat_e10e1")
 
-[node name="Dungeon" type="Node2D"]
+[node name="Dungeon" type="Node2D" unique_id=624138055]
 script = ExtResource("1_4o8wi")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=561608432]
 layer = 101
 
-[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("2_k3a3m")]
+[node name="MainMenu" parent="CanvasLayer" unique_id=211066017 instance=ExtResource("2_k3a3m")]
 offset_left = -1.0
 offset_right = -1.0
 
-[node name="Map" type="Node2D" parent="CanvasLayer"]
+[node name="Map" type="Node2D" parent="CanvasLayer" unique_id=786387076]
 visible = false
 modulate = Color(1, 1, 1, 0)
 script = ExtResource("3_8cieb")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
-libraries = {
-"": SubResource("AnimationLibrary_hl1yx")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=319828602]
+libraries/ = SubResource("AnimationLibrary_hl1yx")
 
-[node name="Menu" parent="CanvasLayer" instance=ExtResource("5_0pboq")]
+[node name="Menu" parent="CanvasLayer" unique_id=588323228 instance=ExtResource("5_0pboq")]
 visible = false
 
-[node name="GUI" type="Control" parent="CanvasLayer"]
+[node name="GUI" type="Control" parent="CanvasLayer" unique_id=162723512]
 visible = false
 z_index = 100
 layout_mode = 3
@@ -91,7 +89,7 @@ grow_horizontal = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_uw23p")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/GUI"]
+[node name="Panel" type="Panel" parent="CanvasLayer/GUI" unique_id=1948354534]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -103,7 +101,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_uw23p")
 
-[node name="Margin" type="MarginContainer" parent="CanvasLayer/GUI/Panel"]
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/GUI/Panel" unique_id=1333373884]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -117,10 +115,10 @@ theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/Panel/Margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/Panel/Margin" unique_id=871238076]
 layout_mode = 2
 
-[node name="RoomLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
+[node name="RoomLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer" unique_id=42892684]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0.545098, 1)
@@ -129,7 +127,7 @@ theme_override_font_sizes/normal_font_size = 18
 text = "Prison Cell 6A"
 scroll_active = false
 
-[node name="HealthLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
+[node name="HealthLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer" unique_id=1697149309]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0.545098, 1)
@@ -138,7 +136,7 @@ theme_override_font_sizes/normal_font_size = 18
 text = "6 HP
 "
 
-[node name="WeaponLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
+[node name="WeaponLabel" type="RichTextLabel" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer" unique_id=1641372654]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0.545098, 1)
@@ -146,17 +144,17 @@ theme_override_fonts/normal_font = SubResource("SystemFont_p4m2n")
 theme_override_font_sizes/normal_font_size = 18
 text = "Weapon: Fist"
 
-[node name="InventoryButton" type="Button" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
+[node name="InventoryButton" type="Button" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer" unique_id=976298023]
 layout_mode = 2
 theme = SubResource("Theme_u7alg")
 text = "Inventory"
 
-[node name="SaveButton" type="Button" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="CanvasLayer/GUI/Panel/Margin/HBoxContainer" unique_id=1525142618]
 layout_mode = 2
 theme = SubResource("Theme_u7alg")
 text = "Save"
 
-[node name="SecretEncounter" parent="CanvasLayer" instance=ExtResource("6_ojxj5")]
+[node name="SecretEncounter" parent="CanvasLayer" unique_id=1355466006 instance=ExtResource("6_ojxj5")]
 visible = false
 script = null
 

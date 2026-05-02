@@ -16,111 +16,111 @@ var main_view
 
 # Theme overrides for syntax highlighting, etc
 var theme_overrides: Dictionary:
-	set(value):
-		theme_overrides = value
+  set(value):
+    theme_overrides = value
 
-		syntax_highlighter = DialogueSyntaxHighlighter.new()
+    syntax_highlighter = DialogueSyntaxHighlighter.new()
 
-		# General UI
-		add_theme_color_override("font_color", theme_overrides.text_color)
-		add_theme_color_override("background_color", theme_overrides.background_color)
-		add_theme_color_override("current_line_color", theme_overrides.current_line_color)
-		add_theme_font_override("font", get_theme_font("source", "EditorFonts"))
-		add_theme_font_size_override("font_size", theme_overrides.font_size * theme_overrides.scale)
-		font_size = round(theme_overrides.font_size)
-	get:
-		return theme_overrides
+    # General UI
+    add_theme_color_override("font_color", theme_overrides.text_color)
+    add_theme_color_override("background_color", theme_overrides.background_color)
+    add_theme_color_override("current_line_color", theme_overrides.current_line_color)
+    add_theme_font_override("font", get_theme_font("source", "EditorFonts"))
+    add_theme_font_size_override("font_size", theme_overrides.font_size * theme_overrides.scale)
+    font_size = round(theme_overrides.font_size)
+  get:
+    return theme_overrides
 
 # Any parse errors
 var errors: Array:
-	set(next_errors):
-		errors = next_errors
-		for i in range(0, get_line_count()):
-			var is_error: bool = false
-			for error in errors:
-				if error.line_number == i:
-					is_error = true
-			mark_line_as_error(i, is_error)
-		_on_code_edit_caret_changed()
-	get:
-		return errors
+  set(next_errors):
+    errors = next_errors
+    for i in range(0, get_line_count()):
+      var is_error: bool = false
+      for error in errors:
+        if error.line_number == i:
+          is_error = true
+      mark_line_as_error(i, is_error)
+    _on_code_edit_caret_changed()
+  get:
+    return errors
 
 # The last selection (if there was one) so we can remember it for refocusing
 var last_selected_text: String
 
 var font_size: int:
-	set(value):
-		font_size = value
-		add_theme_font_size_override("font_size", font_size * theme_overrides.scale)
-	get:
-		return font_size
+  set(value):
+    font_size = value
+    add_theme_font_size_override("font_size", font_size * theme_overrides.scale)
+  get:
+    return font_size
 
 var WEIGHTED_RANDOM_PREFIX: RegEx = RegEx.create_from_string("^\\%[\\d.]+\\s")
 
 
 func _ready() -> void:
-	# Add error gutter
-	add_gutter(0)
-	set_gutter_type(0, TextEdit.GUTTER_TYPE_ICON)
+  # Add error gutter
+  add_gutter(0)
+  set_gutter_type(0, TextEdit.GUTTER_TYPE_ICON)
 
-	# Add comment delimiter
-	if not has_comment_delimiter("#"):
-		add_comment_delimiter("#", "", true)
+  # Add comment delimiter
+  if not has_comment_delimiter("#"):
+    add_comment_delimiter("#", "", true)
 
-	syntax_highlighter = DialogueSyntaxHighlighter.new()
+  syntax_highlighter = DialogueSyntaxHighlighter.new()
 
 
 func _gui_input(event: InputEvent) -> void:
-	# Handle shortcuts that come from the editor
-	if event is InputEventKey and event.is_pressed():
-		var shortcut: String = Engine.get_meta("DialogueManagerPlugin").get_editor_shortcut(event)
-		match shortcut:
-			"toggle_comment":
-				toggle_comment()
-				get_viewport().set_input_as_handled()
-			"delete_line":
-				delete_current_line()
-				get_viewport().set_input_as_handled()
-			"move_up":
-				move_line(-1)
-				get_viewport().set_input_as_handled()
-			"move_down":
-				move_line(1)
-				get_viewport().set_input_as_handled()
-			"text_size_increase":
-				self.font_size += 1
-				get_viewport().set_input_as_handled()
-			"text_size_decrease":
-				self.font_size -= 1
-				get_viewport().set_input_as_handled()
-			"text_size_reset":
-				self.font_size = theme_overrides.font_size
-				get_viewport().set_input_as_handled()
+  # Handle shortcuts that come from the editor
+  if event is InputEventKey and event.is_pressed():
+    var shortcut: String = Engine.get_meta("DialogueManagerPlugin").get_editor_shortcut(event)
+    match shortcut:
+      "toggle_comment":
+        toggle_comment()
+        get_viewport().set_input_as_handled()
+      "delete_line":
+        delete_current_line()
+        get_viewport().set_input_as_handled()
+      "move_up":
+        move_line(-1)
+        get_viewport().set_input_as_handled()
+      "move_down":
+        move_line(1)
+        get_viewport().set_input_as_handled()
+      "text_size_increase":
+        self.font_size += 1
+        get_viewport().set_input_as_handled()
+      "text_size_decrease":
+        self.font_size -= 1
+        get_viewport().set_input_as_handled()
+      "text_size_reset":
+        self.font_size = theme_overrides.font_size
+        get_viewport().set_input_as_handled()
 
-	elif event is InputEventMouse:
-		match event.as_text():
-			"Ctrl+Mouse Wheel Up", "Command+Mouse Wheel Up":
-				self.font_size += 1
-				get_viewport().set_input_as_handled()
-			"Ctrl+Mouse Wheel Down", "Command+Mouse Wheel Down":
-				self.font_size -= 1
-				get_viewport().set_input_as_handled()
+  elif event is InputEventMouse:
+    match event.as_text():
+      "Ctrl+Mouse Wheel Up", "Command+Mouse Wheel Up":
+        self.font_size += 1
+        get_viewport().set_input_as_handled()
+      "Ctrl+Mouse Wheel Down", "Command+Mouse Wheel Down":
+        self.font_size -= 1
+        get_viewport().set_input_as_handled()
 
 
 func _can_drop_data(at_position: Vector2, data) -> bool:
-	if typeof(data) != TYPE_DICTIONARY: return false
-	if data.type != "files": return false
+  if typeof(data) != TYPE_DICTIONARY: return false
+  if data.type != "files": return false
 
-	var files: PackedStringArray = Array(data.files)
-	return files.size() > 0
+  var files: PackedStringArray = Array(data.files)
+  return files.size() > 0
 
 
 func _drop_data(at_position: Vector2, data) -> void:
-	var replace_regex: RegEx = RegEx.create_from_string("[^a-zA-Z_0-9]+")
+  var replace_regex: RegEx = RegEx.create_from_string("[^a-zA-Z_0-9]+")
 
-	var files: PackedStringArray = Array(data.files)
-	for file in files:
-		# Don't import the file into itself
+  var files: PackedStringArray = Array(data.files)
+  for file in files:
+    # Don't import the file into itself
 		if file == main_view.current_file_path: continue
 
 		if file.get_extension() == "dialogue":
@@ -188,14 +188,14 @@ func _request_code_completion(force: bool) -> void:
 
 
 func _filter_code_completion_candidates(candidates: Array) -> Array:
-	# Not sure why but if this method isn't overridden then all completions are wrapped in quotes.
-	return candidates
+  # Not sure why but if this method isn't overridden then all completions are wrapped in quotes.
+  return candidates
 
 
 func _confirm_code_completion(replace: bool) -> void:
-	var completion = get_code_completion_option(get_code_completion_selected_index())
-	begin_complex_operation()
-	# Delete any part of the text that we've already typed
+  var completion = get_code_completion_option(get_code_completion_selected_index())
+  begin_complex_operation()
+  # Delete any part of the text that we've already typed
 	for i in range(0, completion.display_text.length() - completion.insert_text.length()):
 		backspace()
 	# Insert the whole match

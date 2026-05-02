@@ -1,0 +1,9 @@
+~ intro
+You find yourself at the junction of the western and northern corridors.
+=> END!
+
+~ investigate
+In front of you is a door labeled "Observation".
+if !Keys.has("Observation Lock Release$HIDE"):
+	It seems to be electronically locked. You'll need to find some sort of control room to release it.
+=> END!
