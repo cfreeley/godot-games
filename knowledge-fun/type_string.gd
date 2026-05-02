@@ -13,3 +13,4 @@ func _process(delta):
 func _unhandled_input(event):
   if event is InputEventKey and event.pressed and event.keycode >= Key.KEY_A and event.keycode <= Key.KEY_Z:
     text += OS.get_keycode_string(event.physical_keycode)
+    $ErrorString.visible = false

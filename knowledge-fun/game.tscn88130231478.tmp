@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://pxpwrbhmg4jd"]
+
+[ext_resource type="Script" uid="uid://cf1m12ecuf8io" path="res://type_string.gd" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://t6yw0rp15e1u" path="res://game.gd" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://cxwo2ge0rvc07" path="res://remember_label.gd" id="3_feb5d"]
+
+[node name="Game" type="Node2D" unique_id=1411688036]
+script = ExtResource("1_e2o6t")
+
+[node name="Round" type="CanvasLayer" parent="." unique_id=1211240176]
+
+[node name="BGRect" type="ColorRect" parent="Round" unique_id=858002719]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.01, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Round" unique_id=231165337]
+offset_left = 1048.0
+offset_top = 24.0
+offset_right = 1116.0
+offset_bottom = 47.0
+text = "Round: 1"
+
+[node name="TimerLabel" type="Label" parent="Round" unique_id=2045322886]
+offset_left = 1048.0
+offset_top = 64.0
+offset_right = 1088.0
+offset_bottom = 87.0
+text = "0:00"
+
+[node name="Type" type="CanvasLayer" parent="." unique_id=1587401672]
+
+[node name="ClueLabel" type="Label" parent="Type" unique_id=52500292]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -180.0
+offset_bottom = -157.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="TypeString" type="Label" parent="Type" unique_id=464135454]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 84.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+script = ExtResource("1_80nbo")
+
+[node name="Instructions" type="Label" parent="Type" unique_id=1248604940]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 216.0
+offset_bottom = 65.0
+text = "Type as fast as you can!
+Press TAB for hints"
+
+[node name="WordList" type="CanvasLayer" parent="." unique_id=1607401290]
+
+[node name="RememberLabel" type="Label" parent="WordList" unique_id=259968232]
+offset_left = 472.0
+offset_top = 16.0
+offset_right = 674.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 36
+text = "Remember!"
+horizontal_alignment = 1
+script = ExtResource("3_feb5d")
+
+[node name="WordlistLabel" type="Control" parent="WordList" unique_id=355430350]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 472.0
+offset_top = 16.0
+offset_right = 512.0
+offset_bottom = 56.0
+
+[node name="WordlistLabelLeft" type="RichTextLabel" parent="WordList/WordlistLabel" unique_id=1758916886]
+layout_mode = 0
+offset_left = -280.0
+offset_top = 80.0
+offset_right = 240.0
+offset_bottom = 571.0
+bbcode_enabled = true
+
+[node name="WordlistLabelRight" type="RichTextLabel" parent="WordList/WordlistLabel" unique_id=1541143716]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 80.0
+offset_right = 784.0
+offset_bottom = 571.0
+bbcode_enabled = true
+
+[node name="EnterLabel" type="Label" parent="WordList" unique_id=1733712104]
+offset_left = 480.0
+offset_top = 600.0
+offset_right = 671.0
+offset_bottom = 623.0
+text = "(Press enter to continue)"
+horizontal_alignment = 1
