@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfpshenemy1"]
+
+[ext_resource type="Script" path="res://scripts/enemy/scary_enemy.gd" id="1_enemy"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_enemy"]
+albedo_color = Color(0.06, 0.04, 0.04, 1)
+roughness = 0.85
+emission_enabled = true
+emission = Color(0.35, 0.02, 0.02, 1)
+emission_energy_multiplier = 0.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_enemy"]
+radius = 0.35
+height = 2.2
+
+[sub_resource type="BoxMesh" id="Mesh_body"]
+size = Vector3(0.45, 1.6, 0.22)
+
+[sub_resource type="BoxMesh" id="Mesh_shoulders"]
+size = Vector3(1.1, 0.14, 0.18)
+
+[sub_resource type="BoxMesh" id="Mesh_arms"]
+size = Vector3(1.5, 0.10, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_head"]
+size = Vector3(0.30, 0.34, 0.24)
+
+[node name="ScaryEnemy" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.1, 0)
+shape = SubResource("CapsuleShape_enemy")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.8, 0)
+mesh = SubResource("Mesh_body")
+surface_material_override/0 = SubResource("Mat_enemy")
+
+[node name="Shoulders" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.58, 0)
+mesh = SubResource("Mesh_shoulders")
+surface_material_override/0 = SubResource("Mat_enemy")
+
+[node name="Arms" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.92, 0)
+mesh = SubResource("Mesh_arms")
+surface_material_override/0 = SubResource("Mat_enemy")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+position = Vector3(0, 2.04, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_enemy")

@@ -1,0 +1,211 @@
+[gd_scene load_steps=14 format=3 uid="uid://bfpshtestlv1"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/items/holdable_item.gd" id="2_holdable"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/scary_enemy.tscn" id="3_enemy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_paper"]
+size = Vector3(0.21, 0.08, 0.297)
+
+[sub_resource type="BoxMesh" id="BoxMesh_paper"]
+size = Vector3(0.21, 0.005, 0.297)
+
+[sub_resource type="StandardMaterial3D" id="Mat_paper"]
+albedo_color = Color(0.91, 0.88, 0.78, 1)
+roughness = 0.95
+emission_enabled = true
+emission = Color(0.6, 0.57, 0.48, 1)
+emission_energy_multiplier = 0.4
+
+[sub_resource type="StandardMaterial3D" id="Mat_stone"]
+albedo_color = Color(0.18, 0.17, 0.20, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="Mat_ceiling"]
+albedo_color = Color(0.07, 0.06, 0.09, 1)
+roughness = 0.95
+
+[sub_resource type="StandardMaterial3D" id="Mat_plaster"]
+albedo_color = Color(0.30, 0.25, 0.22, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Mat_wood"]
+albedo_color = Color(0.28, 0.17, 0.09, 1)
+roughness = 0.90
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat_horror"]
+sky_top_color = Color(0.02, 0.02, 0.04, 1)
+sky_horizon_color = Color(0.05, 0.02, 0.06, 1)
+ground_bottom_color = Color(0.01, 0.01, 0.02, 1)
+ground_horizon_color = Color(0.04, 0.02, 0.05, 1)
+sun_angle_max = 30.0
+sun_curve = 0.15
+
+[sub_resource type="Sky" id="Sky_horror"]
+sky_material = SubResource("SkyMat_horror")
+
+[sub_resource type="Environment" id="Env_horror"]
+background_mode = 2
+sky = SubResource("Sky_horror")
+ambient_light/source = 2
+ambient_light/color = Color(0.08, 0.06, 0.1, 1)
+ambient_light/energy = 0.5
+ssao_enabled = true
+ssao_radius = 0.8
+ssao_intensity = 2.0
+ssao_power = 1.5
+fog_enabled = true
+fog_light_color = Color(0.04, 0.04, 0.07, 1)
+fog_density = 0.018
+volumetric_fog_enabled = false
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_horror")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.35, 0.357, 0, 0.714, 0.7, -0.5, -0.607, 0.619, 0, 8, 0)
+light_color = Color(0.4, 0.35, 0.5, 1)
+light_energy = 0.15
+shadow_enabled = false
+
+[node name="RoomLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 3.6, 0)
+light_color = Color(0.6, 0.55, 0.7, 1)
+light_energy = 1.3
+omni_range = 18.0
+omni_attenuation = 0.8
+
+[node name="CornerLight" type="OmniLight3D" parent="."]
+position = Vector3(-7, 2.5, -7)
+light_color = Color(0.2, 0.15, 0.3, 1)
+light_energy = 0.7
+omni_range = 10.0
+
+[node name="Floor" type="CSGBox3D" parent="."]
+position = Vector3(0, -0.25, 0)
+size = Vector3(20, 0.5, 20)
+use_collision = true
+material = SubResource("Mat_stone")
+
+[node name="Ceiling" type="CSGBox3D" parent="."]
+position = Vector3(0, 4.25, 0)
+size = Vector3(20, 0.5, 20)
+use_collision = true
+material = SubResource("Mat_ceiling")
+
+[node name="WallNorth" type="CSGBox3D" parent="."]
+position = Vector3(0, 2.0, -10.25)
+size = Vector3(20, 4.5, 0.5)
+use_collision = true
+material = SubResource("Mat_plaster")
+
+[node name="WallSouth" type="CSGBox3D" parent="."]
+position = Vector3(0, 2.0, 10.25)
+size = Vector3(20, 4.5, 0.5)
+use_collision = true
+material = SubResource("Mat_plaster")
+
+[node name="WallWest" type="CSGBox3D" parent="."]
+position = Vector3(-10.25, 2.0, 0)
+size = Vector3(0.5, 4.5, 20)
+use_collision = true
+material = SubResource("Mat_plaster")
+
+[node name="WallEast" type="CSGBox3D" parent="."]
+position = Vector3(10.25, 2.0, 0)
+size = Vector3(0.5, 4.5, 20)
+use_collision = true
+material = SubResource("Mat_plaster")
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="CrateStack" type="Node3D" parent="Props"]
+position = Vector3(-4, 0, -4)
+
+[node name="CrateBottom" type="CSGBox3D" parent="Props/CrateStack"]
+position = Vector3(0, 0.5, 0)
+size = Vector3(1.2, 1.0, 1.2)
+use_collision = true
+material = SubResource("Mat_wood")
+
+[node name="CrateTop" type="CSGBox3D" parent="Props/CrateStack"]
+position = Vector3(0, 1.5, 0)
+size = Vector3(1.0, 1.0, 1.0)
+use_collision = true
+material = SubResource("Mat_wood")
+
+[node name="LongTable" type="CSGBox3D" parent="Props"]
+position = Vector3(4, 0.45, -6)
+size = Vector3(3.0, 0.1, 1.2)
+use_collision = true
+material = SubResource("Mat_wood")
+
+[node name="TableLeg1" type="CSGBox3D" parent="Props"]
+position = Vector3(2.6, 0.2, -5.5)
+size = Vector3(0.1, 0.4, 0.1)
+use_collision = true
+material = SubResource("Mat_wood")
+
+[node name="TableLeg2" type="CSGBox3D" parent="Props"]
+position = Vector3(5.4, 0.2, -5.5)
+size = Vector3(0.1, 0.4, 0.1)
+use_collision = true
+material = SubResource("Mat_wood")
+
+[node name="TableLeg3" type="CSGBox3D" parent="Props"]
+position = Vector3(2.6, 0.2, -6.5)
+size = Vector3(0.1, 0.4, 0.1)
+use_collision = true
+material = SubResource("Mat_wood")
+
+[node name="TableLeg4" type="CSGBox3D" parent="Props"]
+position = Vector3(5.4, 0.2, -6.5)
+size = Vector3(0.1, 0.4, 0.1)
+use_collision = true
+material = SubResource("Mat_wood")
+
+[node name="Pillar" type="CSGBox3D" parent="Props"]
+position = Vector3(3, 2.0, 3)
+size = Vector3(0.5, 4.5, 0.5)
+use_collision = true
+material = SubResource("Mat_stone")
+
+[node name="LooseBox" type="CSGBox3D" parent="Props"]
+position = Vector3(-6, 0.4, 5)
+size = Vector3(0.8, 0.8, 0.8)
+use_collision = true
+material = SubResource("Mat_wood")
+
+[node name="Paper" type="RigidBody3D" parent="Props"]
+position = Vector3(4.3, 0.62, -5.85)
+mass = 0.01
+script = ExtResource("2_holdable")
+item_name = "Torn Note"
+item_id = "torn_note"
+readable_text = "Day 12.
+
+The screaming stopped two nights ago.
+I don't know if that's better or worse.
+
+Don't use the east corridor.
+
+  — R"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/Paper"]
+shape = SubResource("BoxShape3D_paper")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/Paper"]
+mesh = SubResource("BoxMesh_paper")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="Enemy" parent="." instance=ExtResource("3_enemy")]
+position = Vector3(-7, 0, 8)
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+position = Vector3(0, 0, 7)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector3(0, 0, 7)
+groups = ["player"]

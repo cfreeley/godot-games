@@ -1,0 +1,480 @@
+[gd_scene format=3 uid="uid://bfpsparking01"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/items/holdable_item.gd" id="2_holdable"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_asphalt"]
+albedo_color = Color(0.11, 0.11, 0.12, 1)
+roughness = 0.97
+
+[sub_resource type="StandardMaterial3D" id="Mat_lines"]
+albedo_color = Color(0.68, 0.65, 0.55, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="Mat_fence"]
+albedo_color = Color(0.20, 0.22, 0.22, 1)
+roughness = 0.80
+metallic = 0.4
+
+[sub_resource type="StandardMaterial3D" id="Mat_car_dark"]
+albedo_color = Color(0.08, 0.08, 0.09, 1)
+roughness = 0.60
+metallic = 0.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_car_rust"]
+albedo_color = Color(0.28, 0.13, 0.05, 1)
+roughness = 0.90
+
+[sub_resource type="StandardMaterial3D" id="Mat_car_beige"]
+albedo_color = Color(0.44, 0.37, 0.27, 1)
+roughness = 0.75
+metallic = 0.1
+
+[sub_resource type="StandardMaterial3D" id="Mat_glass"]
+transparency = 1
+albedo_color = Color(0.12, 0.18, 0.22, 0.28)
+roughness = 0.12
+metallic = 0.1
+
+[sub_resource type="StandardMaterial3D" id="Mat_lamp"]
+albedo_color = Color(0.22, 0.22, 0.24, 1)
+roughness = 0.60
+metallic = 0.6
+
+[sub_resource type="StandardMaterial3D" id="Mat_paper"]
+albedo_color = Color(0.91, 0.88, 0.78, 1)
+roughness = 0.95
+emission_enabled = true
+emission = Color(0.6, 0.57, 0.48, 1)
+emission_energy_multiplier = 0.4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_paper"]
+size = Vector3(0.21, 0.08, 0.297)
+
+[sub_resource type="BoxMesh" id="BoxMesh_paper"]
+size = Vector3(0.21, 0.005, 0.297)
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat_night"]
+sky_top_color = Color(0.01, 0.01, 0.03, 1)
+sky_horizon_color = Color(0.03, 0.02, 0.05, 1)
+ground_bottom_color = Color(0.01, 0.01, 0.02, 1)
+ground_horizon_color = Color(0.03, 0.02, 0.04, 1)
+sun_angle_max = 10.0
+sun_curve = 0.1
+
+[sub_resource type="Sky" id="Sky_night"]
+sky_material = SubResource("SkyMat_night")
+
+[sub_resource type="Environment" id="Env_night"]
+background_mode = 2
+sky = SubResource("Sky_night")
+ambient_light/source = 2
+ambient_light/color = Color(0.05, 0.05, 0.08, 1)
+ambient_light/energy = 0.25
+ssao_enabled = true
+ssao_radius = 0.8
+ssao_intensity = 2.5
+ssao_power = 1.8
+fog_enabled = true
+fog_light_color = Color(0.02, 0.02, 0.05, 1)
+fog_density = 0.010
+volumetric_fog_enabled = false
+
+[node name="ParkingLot" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_night")
+
+[node name="MoonLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.35, 0.357, 0, 0.714, 0.7, -0.5, -0.607, 0.619, 0, 8, 0)
+light_color = Color(0.55, 0.60, 0.78, 1)
+light_energy = 0.06
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+position = Vector3(0, -0.15, 0)
+size = Vector3(40, 0.3, 32)
+use_collision = true
+material = SubResource("Mat_asphalt")
+
+[node name="ParkingLines" type="Node3D" parent="."]
+
+[node name="LaneLineN" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(0, 0.005, -5)
+size = Vector3(40, 0.01, 0.12)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="LaneLineS" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(0, 0.005, 5)
+size = Vector3(40, 0.01, 0.12)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayN1" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(-18, 0.005, -10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayN2" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(-12, 0.005, -10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayN3" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(-6, 0.005, -10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayN4" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(0, 0.005, -10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayN5" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(6, 0.005, -10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayN6" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(12, 0.005, -10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayN7" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(18, 0.005, -10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayS1" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(-18, 0.005, 10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayS2" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(-12, 0.005, 10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayS3" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(-6, 0.005, 10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayS4" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(0, 0.005, 10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayS5" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(6, 0.005, 10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayS6" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(12, 0.005, 10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="BayS7" type="CSGBox3D" parent="ParkingLines"]
+position = Vector3(18, 0.005, 10)
+size = Vector3(0.12, 0.01, 10)
+use_collision = false
+material = SubResource("Mat_lines")
+
+[node name="Fence" type="Node3D" parent="."]
+
+[node name="FenceNorth" type="CSGBox3D" parent="Fence"]
+position = Vector3(0, 1.25, -16.075)
+size = Vector3(40, 2.5, 0.15)
+use_collision = true
+material = SubResource("Mat_fence")
+
+[node name="FenceSouth" type="CSGBox3D" parent="Fence"]
+position = Vector3(0, 1.25, 16.075)
+size = Vector3(40, 2.5, 0.15)
+use_collision = true
+material = SubResource("Mat_fence")
+
+[node name="FenceEast" type="CSGBox3D" parent="Fence"]
+position = Vector3(20.075, 1.25, 0)
+size = Vector3(0.15, 2.5, 32)
+use_collision = true
+material = SubResource("Mat_fence")
+
+[node name="FenceWest" type="CSGBox3D" parent="Fence"]
+position = Vector3(-20.075, 1.25, 0)
+size = Vector3(0.15, 2.5, 32)
+use_collision = true
+material = SubResource("Mat_fence")
+
+[node name="PostNW" type="CSGBox3D" parent="Fence"]
+position = Vector3(-20, 1.3, -16)
+size = Vector3(0.3, 2.6, 0.3)
+use_collision = true
+material = SubResource("Mat_fence")
+
+[node name="PostNE" type="CSGBox3D" parent="Fence"]
+position = Vector3(20, 1.3, -16)
+size = Vector3(0.3, 2.6, 0.3)
+use_collision = true
+material = SubResource("Mat_fence")
+
+[node name="PostSW" type="CSGBox3D" parent="Fence"]
+position = Vector3(-20, 1.3, 16)
+size = Vector3(0.3, 2.6, 0.3)
+use_collision = true
+material = SubResource("Mat_fence")
+
+[node name="PostSE" type="CSGBox3D" parent="Fence"]
+position = Vector3(20, 1.3, 16)
+size = Vector3(0.3, 2.6, 0.3)
+use_collision = true
+material = SubResource("Mat_fence")
+
+[node name="Cars" type="Node3D" parent="."]
+
+[node name="Car1" type="Node3D" parent="Cars"]
+position = Vector3(-9, 0, -10)
+
+[node name="Body" type="CSGBox3D" parent="Cars/Car1"]
+position = Vector3(0, 0.38, 0)
+size = Vector3(4.2, 0.75, 1.8)
+use_collision = true
+material = SubResource("Mat_car_dark")
+
+[node name="Cabin" type="CSGBox3D" parent="Cars/Car1"]
+position = Vector3(-0.2, 1.07, 0)
+size = Vector3(2.1, 0.65, 1.65)
+use_collision = true
+material = SubResource("Mat_car_dark")
+
+[node name="Windshield" type="CSGBox3D" parent="Cars/Car1"]
+position = Vector3(0.85, 1.05, 0)
+size = Vector3(0.08, 0.58, 1.6)
+use_collision = false
+material = SubResource("Mat_glass")
+
+[node name="RearGlass" type="CSGBox3D" parent="Cars/Car1"]
+position = Vector3(-1.25, 1.05, 0)
+size = Vector3(0.08, 0.58, 1.6)
+use_collision = false
+material = SubResource("Mat_glass")
+
+[node name="Car2" type="Node3D" parent="Cars"]
+position = Vector3(7, 0, -10)
+
+[node name="Body" type="CSGBox3D" parent="Cars/Car2"]
+position = Vector3(0, 0.38, 0)
+size = Vector3(4.2, 0.75, 1.8)
+use_collision = true
+material = SubResource("Mat_car_rust")
+
+[node name="Cabin" type="CSGBox3D" parent="Cars/Car2"]
+position = Vector3(0.1, 1.07, 0)
+size = Vector3(2.1, 0.65, 1.65)
+use_collision = true
+material = SubResource("Mat_car_rust")
+
+[node name="Windshield" type="CSGBox3D" parent="Cars/Car2"]
+position = Vector3(1.0, 1.05, 0)
+size = Vector3(0.08, 0.58, 1.6)
+use_collision = false
+material = SubResource("Mat_glass")
+
+[node name="RearGlass" type="CSGBox3D" parent="Cars/Car2"]
+position = Vector3(-1.1, 1.05, 0)
+size = Vector3(0.08, 0.58, 1.6)
+use_collision = false
+material = SubResource("Mat_glass")
+
+[node name="Car3" type="Node3D" parent="Cars"]
+position = Vector3(4, 0, 10)
+
+[node name="Body" type="CSGBox3D" parent="Cars/Car3"]
+position = Vector3(0, 0.38, 0)
+size = Vector3(4.2, 0.75, 1.8)
+use_collision = true
+material = SubResource("Mat_car_beige")
+
+[node name="Cabin" type="CSGBox3D" parent="Cars/Car3"]
+position = Vector3(0, 1.07, 0)
+size = Vector3(2.1, 0.65, 1.65)
+use_collision = true
+material = SubResource("Mat_car_beige")
+
+[node name="Windshield" type="CSGBox3D" parent="Cars/Car3"]
+position = Vector3(0.9, 1.05, 0)
+size = Vector3(0.08, 0.58, 1.6)
+use_collision = false
+material = SubResource("Mat_glass")
+
+[node name="RearGlass" type="CSGBox3D" parent="Cars/Car3"]
+position = Vector3(-1.15, 1.05, 0)
+size = Vector3(0.08, 0.58, 1.6)
+use_collision = false
+material = SubResource("Mat_glass")
+
+[node name="Lamps" type="Node3D" parent="."]
+
+[node name="Lamp1" type="Node3D" parent="Lamps"]
+position = Vector3(-16, 0, 2)
+
+[node name="Pole" type="CSGBox3D" parent="Lamps/Lamp1"]
+position = Vector3(0, 2.75, 0)
+size = Vector3(0.12, 5.5, 0.12)
+use_collision = false
+material = SubResource("Mat_lamp")
+
+[node name="Arm" type="CSGBox3D" parent="Lamps/Lamp1"]
+position = Vector3(0.5, 5.55, 0)
+size = Vector3(1.0, 0.10, 0.10)
+use_collision = false
+material = SubResource("Mat_lamp")
+
+[node name="Light" type="SpotLight3D" parent="Lamps/Lamp1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.0, 5.4, 0)
+light_color = Color(1.0, 0.92, 0.76, 1)
+light_energy = 5.0
+spot_range = 18.0
+spot_angle = 42.0
+spot_attenuation = 0.5
+shadow_enabled = true
+
+[node name="Lamp2" type="Node3D" parent="Lamps"]
+position = Vector3(14, 0, -6)
+
+[node name="Pole" type="CSGBox3D" parent="Lamps/Lamp2"]
+position = Vector3(0, 2.75, 0)
+size = Vector3(0.12, 5.5, 0.12)
+use_collision = false
+material = SubResource("Mat_lamp")
+
+[node name="Arm" type="CSGBox3D" parent="Lamps/Lamp2"]
+position = Vector3(-0.5, 5.55, 0)
+size = Vector3(1.0, 0.10, 0.10)
+use_collision = false
+material = SubResource("Mat_lamp")
+
+[node name="Light" type="SpotLight3D" parent="Lamps/Lamp2"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.0, 5.4, 0)
+light_color = Color(1.0, 0.92, 0.76, 1)
+light_energy = 5.0
+spot_range = 18.0
+spot_angle = 42.0
+spot_attenuation = 0.5
+shadow_enabled = true
+
+[node name="Notes" type="Node3D" parent="."]
+
+[node name="Note1" type="RigidBody3D" parent="Notes"]
+position = Vector3(-6.8, 0.01, -8.4)
+mass = 0.01
+script = ExtResource("2_holdable")
+item_name = "Crumpled Note"
+item_id = "note_cars"
+readable_text = "Tried the cars.
+All dead.
+
+Battery in the dark one
+might still have charge—
+the lights flickered when
+I slammed the door.
+
+Don't bother with
+the rust bucket.
+Already checked. Twice.
+
+Keep the gate in sight.
+Something moves along
+the fence line after dark.
+
+  — M"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Notes/Note1"]
+shape = SubResource("BoxShape3D_paper")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Notes/Note1"]
+mesh = SubResource("BoxMesh_paper")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="Note2" type="RigidBody3D" parent="Notes"]
+position = Vector3(-17.5, 0.01, -14.0)
+mass = 0.01
+script = ExtResource("2_holdable")
+item_name = "Torn Page"
+item_id = "note_signal"
+readable_text = "Getting signal on
+the radio. Channel 7.
+Static, then silence,
+then three tones.
+
+Always three tones.
+
+We tried broadcasting
+back on day four.
+
+The tones stopped
+for six hours.
+
+Then came back louder.
+
+We stopped trying."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Notes/Note2"]
+shape = SubResource("BoxShape3D_paper")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Notes/Note2"]
+mesh = SubResource("BoxMesh_paper")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="Note3" type="RigidBody3D" parent="Notes"]
+position = Vector3(1.5, 0.01, 1.6)
+mass = 0.01
+script = ExtResource("2_holdable")
+item_name = "Notepad Leaf"
+item_id = "note_journal"
+readable_text = "Oct 19
+
+The car horn goes off
+by itself. 3am, every
+night without fail.
+
+I stopped going to
+check on day two.
+
+There is nothing in
+the car. I know that.
+
+The footprints this
+morning went to the
+south fence and just
+stopped. No gate open.
+No way out."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Notes/Note3"]
+shape = SubResource("BoxShape3D_paper")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Notes/Note3"]
+mesh = SubResource("BoxMesh_paper")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+position = Vector3(0, 0, 13)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector3(0, 0, 13)
+groups = ["player"]

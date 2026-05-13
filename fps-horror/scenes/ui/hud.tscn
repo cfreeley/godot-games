@@ -1,0 +1,131 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfpshhud0001"]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+
+[sub_resource type="StyleBoxFlat" id="ReadingBG"]
+bg_color = Color(0.04, 0.03, 0.06, 0.88)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+groups = ["hud"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="Label" parent="Control/Center"]
+layout_mode = 2
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 1, 1, 0.75)
+mouse_filter = 2
+
+[node name="InteractionPrompt" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -90.0
+offset_right = 180.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[E]  Interact"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+visible = false
+mouse_filter = 2
+
+[node name="HeldPrompt" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[LMB]  Put down"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 0.75)
+visible = false
+mouse_filter = 2
+
+[node name="ReadingPanel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -270.0
+offset_top = -440.0
+offset_right = 270.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+clip_contents = true
+theme_override_styles/panel = SubResource("ReadingBG")
+visible = false
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Control/ReadingPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="Control/ReadingPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ReadingText" type="Label" parent="Control/ReadingPanel/Margin/VBox"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.88, 0.84, 0.72, 1)
+
+[node name="CloseHint" type="Label" parent="Control/ReadingPanel/Margin/VBox"]
+layout_mode = 2
+text = "[LMB]  Put down"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.55, 0.55, 0.55, 0.8)
+mouse_filter = 2

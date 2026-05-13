@@ -1,0 +1,12 @@
+# Godot editor/cache artefacts — never commit these
+.godot/
+
+# Import metadata is regenerated from source assets; safe to ignore
+*.import
+
+# Exported binaries
+exports/
+*.exe
+*.x86_64
+*.apk
+*.aab

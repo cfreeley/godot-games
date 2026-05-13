@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfpshmain001"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/parking_lot.tscn" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="2_hud"]
+
+[node name="Main" type="Node"]
+
+[node name="Level" parent="." instance=ExtResource("1_level")]
+
+[node name="HUD" parent="." instance=ExtResource("2_hud")]
